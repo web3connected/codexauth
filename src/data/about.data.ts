@@ -5,64 +5,64 @@ import type { FactCard } from '@/components/codex/shared/panels/SplitTextFactsPa
 import type { CtaButton } from '@/components/codex/shared/panels/CenteredCtaPanel';
 
 export const aboutMissionParagraphs: string[] = [
-  'Web3Codex builds tamper-evident, time-bound, and chain-verified hashing for developers who need more than SHA-256 — without running a blockchain.',
-  'Our flagship product, CodexHarmonicHash, applies HMAC-SHA3-512 across 16 entropy-mixing rounds seeded from physics-derived constants. Collision resistance comes not just from computation, but from the structure of the universe.',
-  'Every hash is anchored to the current moment via the TIU — a harmonic float computed from the speed of light, Planck time, and the golden ratio. You cannot spoof a TIU. Time moves, and so does the hash.',
+  'Web3Codex builds identity and authentication infrastructure for developers who need more than JWT libraries — without the overhead of running an identity provider.',
+  'CodexAuth combines three layers of the Web3Codex stack: CodexHarmonicHash for credential verification, CodexTime for TIU-anchored token binding, and CodexSecure for zone-based access enforcement.',
+  'The result is a session that is mathematically time-locked, cryptographically chain-verified, and contextually zone-aware — from a single API call.',
 ];
 
-export const aboutMissionHighlight = 'CodexHarmonicHash';
+export const aboutMissionHighlight = 'CodexAuth';
 
 export const aboutStatCards: StatCard[] = [
-  { value: 'φ = 1.618…', label: 'The same ratio in sunflower seeds, galaxies, and our entropy seeds', color: 'text-auth-primary' },
-  { value: 'sin(t × 2π)', label: 'Pythagorean harmonic oscillation — now a cryptographic time anchor', color: 'text-auth-secondary' },
-  { value: '16 rounds', label: 'Iterative entropy mixing — each round recombines physics with data', color: 'text-white' },
+  { value: 'Z1–Z12', label: 'Zone levels evaluated per session by CodexSecure', color: 'text-auth-primary' },
+  { value: 'TIU', label: 'Time Interval Unit anchors every JWT to a precise temporal window', color: 'text-auth-secondary' },
+  { value: '< 50ms', label: 'Average auth round-trip including zone evaluation and token issuance', color: 'text-white' },
 ];
 
 export const aboutPrinciples: OverlayGridCard[] = [
   {
-    symbol: 'φ',
-    tag: 'golden ratio · entropy seed',
-    name: 'The Golden Ratio',
-    description: 'φ = 1.6180339… appears without being placed — in nautilus shells, in the proportions of the Parthenon, in the branching of trees. It is not a human invention. We use it as an entropy seed because nature already proved it works.',
-    stat: '1.618…',
-    statLabel: 'Immovable constant',
-  },
-  {
-    symbol: 'C',
-    tag: 'speed of light · time anchor',
-    name: 'The Speed of Light',
-    description: 'Every hash in CodexHarmonicHash is anchored to physical time via a constant derived from C and Planck time. Not a clock on a server — a constant of the universe. It cannot be faked or rewound.',
-    stat: '299,792 km/s',
-    statLabel: 'The only clock we trust',
-  },
-  {
-    symbol: '∿',
-    tag: 'sin(t × 2π) · TIU function',
-    name: 'Harmonic Oscillation',
-    description: 'Pythagoras described the universe as a harmony of ratios. We use sin(fractional_time × 2π) — the same oscillation function — to compute the TIU that binds every hash to the present moment.',
-    stat: '0.618034',
-    statLabel: 'Canonical TIU anchor',
+    symbol: '🔐',
+    tag: 'CodexHarmonicHash · credential layer',
+    name: 'Hash-Verified Identity',
+    description: 'Passwords are not stored and compared. They are verified through CodexHarmonicHash — 16 rounds of HMAC-SHA3-512 with physics-derived entropy seeds. A tampered credential breaks the hash chain immediately.',
+    stat: '16 rounds',
+    statLabel: 'Entropy mixing per credential check',
   },
   {
     symbol: '⧖',
-    tag: 'chain-linked · tamper-evident',
-    name: 'The Chain',
-    description: 'Ancient manuscripts were called codices because of how they were bound: sequentially, each page depending on the last. Our hash chains work the same way. Change one entry and every record after it breaks instantly.',
+    tag: 'CodexTime · temporal layer',
+    name: 'Time-Locked Sessions',
+    description: 'Every JWT embeds a TIU — a harmonic float computed from the speed of light, Planck time, and the golden ratio. Tokens from expired TIU windows are rejected without a database lookup. Time moves; the token moves with it.',
+    stat: '0.618034',
+    statLabel: 'Canonical TIU anchor value',
+  },
+  {
+    symbol: '🛡',
+    tag: 'CodexSecure · zone layer',
+    name: 'Zone Enforcement',
+    description: 'CodexSecure evaluates device fingerprint, IP reputation, and user flags to assign a zone (Z1–Z12). Every route and API endpoint enforces zone boundaries automatically. No custom guard code required.',
+    stat: '12',
+    statLabel: 'Security zones enforced per session',
+  },
+  {
+    symbol: '∞',
+    tag: 'chain-linked · audit trail',
+    name: 'Verifiable Auth Trail',
+    description: 'Every login, token refresh, zone boundary crossing, and failed attempt is logged as a chain-linked audit record. Alter any entry and every record after it is immediately invalidated. No blockchain required.',
     stat: '1 bit',
-    statLabel: 'Change detected across chain',
+    statLabel: 'Change detected across audit chain',
   },
 ];
 
 export const aboutNamingParagraphs: string[] = [
   'A codex was not just a book. It was the invention of the bound manuscript — pages linked in sequence, each depending on the position of the last. It replaced the scroll because it was indexed, durable, and tamper-evident in a way scrolls were not.',
-  'That is exactly how our hash chains work. Every event links to the one before it. Alter any record, and every record after it becomes invalid. No consensus mechanism. No token. Just mathematics.',
-  'The codex was a technology leap in 300 AD. We think the same idea — chained, ordered, verifiable records — is still underused in modern software. We are building the tools to change that.',
+  'Authentication has the same problem scrolls had: tokens are stateless slips of data with no link to what came before. CodexAuth changes that by binding each session to a time anchor and a zone context — a chain of trust that cannot be silently forged.',
+  'The codex was a technology leap in 300 AD. We think the same idea — chained, ordered, verifiable records — is still underused in modern auth. We are building the tools to change that.',
 ];
 
 export const aboutNamingFacts: FactCard[] = [
-  { label: 'Chain formula', value: 'SHA256(payload + prev_hash + context)', mono: true },
-  { label: 'Chain property', value: 'Alter one record → all downstream hashes invalid', mono: false },
-  { label: 'Requires', value: 'No blockchain · No consensus · No token', mono: false },
+  { label: 'Token structure', value: 'sub + zone + tiu + device_hash + exp', mono: true },
+  { label: 'Replay prevention', value: 'Expired TIU → rejected without DB lookup', mono: false },
+  { label: 'Requires', value: 'No blockchain · No identity provider · No ops overhead', mono: false },
 ];
 
 export const aboutTimeline: TimelineItem[] = [
@@ -78,17 +78,17 @@ export const aboutTimeline: TimelineItem[] = [
   },
   {
     era: '2010s',
-    label: 'Cryptography matures',
-    detail: 'SHA-3, HMAC, and post-quantum hashing give engineers tools to build tamper-evident systems at scale.',
+    label: 'JWT and modern auth mature',
+    detail: 'JSON Web Tokens, OAuth2, and OIDC give engineers a common token format — but replay prevention and zone enforcement remained custom problems.',
   },
   {
     era: 'Now',
     label: 'CodexAuth',
-    detail: 'We combine all three layers: physics-derived constants, modern cryptographic primitives, and chain-linked temporal anchoring.',
+    detail: 'We combine CodexHarmonicHash credential verification, CodexTime TIU anchoring, and CodexSecure zone enforcement into a single auth API.',
   },
 ];
 
 export const aboutCtaButtons: CtaButton[] = [
   { label: 'Read the Docs', href: '/docs', primary: true },
-  { label: 'View on GitHub', href: 'https://github.com/web3codex/codexauth', external: true },
+  { label: 'View on GitHub', href: 'https://github.com/web3connected/codexauth', external: true },
 ];

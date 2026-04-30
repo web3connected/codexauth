@@ -1,27 +1,50 @@
+import React from 'react';
 import type { TierCard } from '@/components/codex/shared/panels/TierComparisonGrid';
 
 export const codexHashTiers: TierCard[] = [
   {
-    name: 'Commercial',
+    name: 'Starter',
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016 2.993 2.993 0 002.25-1.016 3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
       </svg>
     ),
-    stat: '256-bit',
-    statLabel: '64 hex characters per hash',
-    badge: 'Standard',
+    stat: '10K',
+    statLabel: 'auth events / month',
+    badge: 'Free',
     description:
-      'Performance-optimised hashing for consumer apps, SaaS platforms, and any use case where throughput matters alongside strong security.',
+      'Perfect for side projects and early-stage apps. Includes zone-aware sessions, JWT issuance, and full API access on the free tier.',
     useCases: [
-      'User data integrity',
-      'API payload signing',
-      'Document fingerprinting',
-      'Session verification',
+      'Side projects',
+      'Prototypes',
+      'Internal tools',
+      'Developer testing',
     ],
     highlight: false,
-    ctaLabel: 'Get Started',
-    ctaHref: '/docs/getting-started',
+    ctaLabel: 'Get Started Free',
+    ctaHref: '/getting-started',
+  },
+  {
+    name: 'Growth',
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+      </svg>
+    ),
+    stat: '500K',
+    statLabel: 'auth events / month',
+    badge: 'Most Popular',
+    description:
+      'Built for scaling SaaS. Full zone enforcement (Z1–Z12), device trust, TIU time-locked JWTs, and SOC2-ready audit logs.',
+    useCases: [
+      'SaaS applications',
+      'Web3 portals',
+      'API-first products',
+      'Multi-tenant platforms',
+    ],
+    highlight: true,
+    ctaLabel: 'Start Free Trial',
+    ctaHref: '/getting-started',
   },
   {
     name: 'Enterprise',
@@ -30,38 +53,16 @@ export const codexHashTiers: TierCard[] = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
       </svg>
     ),
-    stat: '512-bit',
-    statLabel: '128 hex characters per hash',
-    badge: 'Most Popular',
+    stat: 'Unlimited',
+    statLabel: 'auth events + dedicated infra',
+    badge: 'Enterprise',
     description:
-      'Double-width output for regulated industries. Built for SOC2, HIPAA, and GDPR compliance where audit trails and data integrity proofs are mandatory.',
+      'Dedicated infrastructure, custom zone policies, SAML/OIDC federation, 99.99% SLA, and a dedicated support engineer.',
     useCases: [
-      'Healthcare records',
-      'Financial transactions',
-      'Legal document chains',
-      'Compliance audit logs',
-    ],
-    highlight: true,
-    ctaLabel: 'Start Free Trial',
-    ctaHref: '/pricing',
-  },
-  {
-    name: 'Government',
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-      </svg>
-    ),
-    stat: '1024-bit',
-    statLabel: '256 hex characters per hash',
-    badge: 'Defense Grade',
-    description:
-      'Maximum-strength output with Harmonic Lock — a domain-separated layer that cannot be cross-validated against lower tiers. Designed for critical infrastructure.',
-    useCases: [
-      'Critical infrastructure',
-      'Defense systems',
-      'National records integrity',
-      'Long-term evidence preservation',
+      'Regulated industries',
+      'Financial services',
+      'Healthcare platforms',
+      'Government portals',
     ],
     highlight: false,
     ctaLabel: 'Contact Sales',

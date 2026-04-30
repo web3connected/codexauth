@@ -48,6 +48,6 @@ export const codexHashCommunityLinks: CommunityLink[] = [
 ];
 
 export const codexHashCtaButtons: CommunityCtaButton[] = [
-  { label: 'Create Free Account', href: '/register', primary: true },
+  { label: 'Start Building Free', href: '/getting-started', primary: true },
   { label: 'Read the Docs', href: '/docs', primary: false },
 ];

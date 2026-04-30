@@ -2,70 +2,54 @@ import type { QuickStartLanguage, InstallCommand } from '@/components/codex/shar
 
 export const quickStartLanguages: QuickStartLanguage[] = [
   { id: 'javascript', name: 'JavaScript', icon: 'JS' },
-  { id: 'python', name: 'Python', icon: 'PY' },
-  { id: 'go', name: 'Go', icon: 'GO' },
-  { id: 'rust', name: 'Rust', icon: 'RS' },
+  { id: 'typescript', name: 'TypeScript', icon: 'TS' },
 ];
 
 export const quickStartCodeExamples: Record<string, string> = {
-  javascript: `import { CodexAuth } from '@web3connected/codexauth-starter-kit';
+  javascript: `import { CodexAuthClient } from '@web3connected/codexauth-sdk';
 
-const hasher = new CodexAuth({
-  algorithm: 'harmonic',
-  securityLevel: 'quantum-resistant'
+const auth = new CodexAuthClient({
+  apiUrl: 'https://codexauth.web3connected.com/api',
+  appId: 'YOUR_APP_ID',
 });
 
-// Generate a quantum-resistant hash
-const result = await hasher.hash('Your data here');
-console.log(result.hash);
-// Output: "ch_a7b3c9d2e4f5..."`,
+// Login and receive a time-locked JWT
+const session = await auth.login({
+  identifier: 'user@example.com',
+  password: 'secret',
+});
 
-  python: `from codexauth import CodexAuth
+console.log(session.token);
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
-hasher = CodexAuth(
-    algorithm="harmonic",
-    security_level="quantum-resistant"
-)
+// Call a protected API endpoint
+const profile = await auth.get('/users/me', session.token);
+console.log(profile.data);`,
 
-# Generate a quantum-resistant hash
-result = hasher.hash("Your data here")
-print(result.hash)
-# Output: "ch_a7b3c9d2e4f5..."`,
+  typescript: `import { CodexAuthClient, AuthSession } from '@web3connected/codexauth-sdk';
 
-  go: `package main
+const auth = new CodexAuthClient({
+  apiUrl: 'https://codexauth.web3connected.com/api',
+  appId: process.env.CODEXAUTH_APP_ID!,
+});
 
-import "github.com/web3connected/codexauth-go"
+// Login — returns a zone-aware, TIU time-locked session
+const session: AuthSession = await auth.login({
+  identifier: 'user@example.com',
+  password: 'secret',
+});
 
-func main() {
-    hasher := codexauth.New(codexauth.Options{
-        Algorithm:     "harmonic",
-        SecurityLevel: "quantum-resistant",
-    })
+// Verify the token server-side
+const claims = await auth.verify(session.token);
+console.log(claims.zone);   // e.g. "Z3"
+console.log(claims.userId); // "usr_a7b3c9d2e4f5"
 
-    // Generate a quantum-resistant hash
-    result, _ := hasher.Hash("Your data here")
-    fmt.Println(result.Hash)
-    // Output: "ch_a7b3c9d2e4f5..."
-}`,
-
-  rust: `use codexauth::CodexAuth;
-
-fn main() {
-    let hasher = CodexAuth::new()
-        .algorithm("harmonic")
-        .security_level("quantum-resistant")
-        .build();
-
-    // Generate a quantum-resistant hash
-    let result = hasher.hash("Your data here").unwrap();
-    println!("{}", result.hash);
-    // Output: "ch_a7b3c9d2e4f5..."
-}`,
+// Refresh before the TIU window expires
+const refreshed = await auth.refresh(session.refreshToken);`,
 };
 
 export const quickStartInstallCommands: InstallCommand[] = [
-  { manager: 'npm', command: 'npm install @web3connected/codexauth-starter-kit' },
-  { manager: 'pip', command: 'pip install codexauth' },
-  { manager: 'go', command: 'go get github.com/web3connected/codexauth-go' },
-  { manager: 'cargo', command: 'cargo add codexauth' },
+  { manager: 'npm', command: 'npm install @web3connected/codexauth-sdk' },
+  { manager: 'yarn', command: 'yarn add @web3connected/codexauth-sdk' },
+  { manager: 'pnpm', command: 'pnpm add @web3connected/codexauth-sdk' },
 ];

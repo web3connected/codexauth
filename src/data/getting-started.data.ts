@@ -9,7 +9,7 @@ export const gettingStartedHero = {
   title: 'Get Started with',
   titleHighlight: 'CodexAuth',
   subtitle:
-    'Quantum-resistant hashing for modern applications. Install, integrate, and generate your first hash in under ten minutes.',
+    'Zone-aware authentication for modern applications. Install, integrate, and issue your first time-locked JWT in under ten minutes.',
   backgroundImageSrc: '/assets/images/quantum-computing.jpg',
 } as const;
 
@@ -26,30 +26,30 @@ export interface GsFeatureCard {
 export const gettingStartedFeatureCards: GsFeatureCard[] = [
   {
     iconName: 'Zap',
-    title: 'Easy to Use',
-    tagline: 'Simple API surface',
+    title: 'Fast Integration',
+    tagline: 'One SDK, one import',
     description:
-      'A clean, intuitive API with comprehensive documentation means you can generate your first quantum-resistant hash in minutes, not hours.',
+      'A clean, intuitive API with full TypeScript types. Login, token refresh, zone enforcement, and protected API calls — all from a single import.',
     stat: '< 10 min',
-    statLabel: 'average time to first hash',
+    statLabel: 'average time to first JWT',
   },
   {
     iconName: 'Shield',
-    title: 'Quantum Secure',
-    tagline: '512-bit strength',
+    title: 'Zone-Aware Security',
+    tagline: 'Z1–Z12 enforcement',
     description:
-      'Built on the HarmonicHash algorithm using universal physics constants — speed of light, Planck frequency, and the golden ratio — for genuine quantum resistance.',
-    stat: '512-bit',
-    statLabel: 'cryptographic strength',
+      'Every session carries a zone claim evaluated by CodexSecure. Routes and APIs enforce zone boundaries automatically — no custom guard code required.',
+    stat: '12',
+    statLabel: 'security zones enforced',
   },
   {
     iconName: 'Globe',
-    title: 'Versatile',
-    tagline: 'Multi-language SDKs',
+    title: 'Replay-Proof JWTs',
+    tagline: 'TIU temporal anchor',
     description:
-      'Official SDKs for JavaScript, TypeScript, and Python. Supports multiple hashing modes, temporal anchoring, and hex / Base64 output formats.',
-    stat: '3+',
-    statLabel: 'official SDK languages',
+      'Tokens embed a Time Interval Unit from CodexTime. Expired or replayed tokens are rejected without a database lookup — zero overhead on every request.',
+    stat: 'Zero',
+    statLabel: 'valid replays from expired windows',
   },
 ];
 
@@ -58,32 +58,32 @@ export const gettingStartedSteps: NumberedStep[] = [
   {
     step: 1,
     title: 'Install the SDK',
-    description: 'Add CodexAuth to your project with your preferred package manager.',
-    detail: 'npm install @web3codex/codexauth   |   yarn add @web3codex/codexauth   |   pnpm add @web3codex/codexauth',
+    description: 'Add the CodexAuth SDK to your project with your preferred package manager.',
+    detail: 'npm install @web3connected/codexauth-sdk   |   yarn add @web3connected/codexauth-sdk',
   },
   {
     step: 2,
-    title: 'Import and Initialise',
-    description: 'Import HarmonicHash and create a client instance with your preferred configuration.',
-    detail: 'Pass sacredMatrix (default: 12) and temporalDynamics (true/false) to tune security and performance.',
+    title: 'Initialise the Client',
+    description: 'Create a CodexAuthClient instance pointing at the CodexAuth API.',
+    detail: 'Pass your CODEXAUTH_APP_ID and the API URL: https://codexauth.web3connected.com/api',
   },
   {
     step: 3,
-    title: 'Generate Your First Hash',
-    description: 'Call hasher.generate(input) with any string, Buffer, or object to produce a quantum-resistant hash.',
-    detail: 'The hash output is deterministic for the same input and configuration, and encodes 512 bits of security.',
+    title: 'Authenticate a User',
+    description: 'Call auth.login() with the user\'s identifier and password to receive a signed JWT.',
+    detail: 'The response includes a zone claim (Z1–Z12), a TIU-anchored JWT, and a refresh token.',
   },
   {
     step: 4,
-    title: 'Verify Hash Integrity',
-    description: 'Use hasher.verify(input, hash) to validate that a hash matches its original input.',
-    detail: 'Verification is constant-time to prevent timing attacks and returns a boolean result.',
+    title: 'Verify Tokens Server-side',
+    description: 'Use auth.verify() in your middleware to validate every protected request.',
+    detail: 'Verification checks the JWT signature, TIU window, zone claim, and revocation status — no DB hit.',
   },
   {
     step: 5,
-    title: 'Explore Advanced Features',
-    description: 'Unlock temporal anchoring, fork detection, hash chaining, and replay prevention for production use.',
-    detail: 'See the full API Reference and Examples sections in Documentation for in-depth guidance.',
+    title: 'Enforce Zone Policies',
+    description: 'Read the zone claim on each request and gate access to sensitive operations.',
+    detail: 'Z1–Z3 = public, Z4–Z7 = authenticated, Z8–Z12 = elevated. See the Docs for the full zone matrix.',
   },
 ];
 
@@ -91,71 +91,70 @@ export const gettingStartedSteps: NumberedStep[] = [
 export const gettingStartedLanguages: QuickStartLanguage[] = [
   { id: 'typescript', name: 'TypeScript', icon: 'TS' },
   { id: 'javascript', name: 'JavaScript', icon: 'JS' },
-  { id: 'python',     name: 'Python',     icon: 'PY' },
 ];
 
 export const gettingStartedCodeExamples: Record<string, string> = {
-  typescript: `import { HarmonicHash } from '@web3codex/codexauth';
+  typescript: `import { CodexAuthClient, AuthSession } from '@web3connected/codexauth-sdk';
 
-const hasher = new HarmonicHash({
-  sacredMatrix: 12,       // Sacred 12-dimensional matrix
-  temporalDynamics: true, // Enable TIU temporal binding
+const auth = new CodexAuthClient({
+  apiUrl: 'https://codexauth.web3connected.com/api',
+  appId: process.env.CODEXAUTH_APP_ID!,
 });
 
-// Generate a quantum-resistant hash
-const input = 'Hello, CodexAuth!';
-const hash = await hasher.generate(input);
-console.log(hash);
-// → "9a7f5e2d8c1b6e4f3a9d7c2e8b1f5a6c..."
-
-// Verify hash integrity
-const isValid = await hasher.verify(input, hash);
-console.log(isValid); // true`,
-
-  javascript: `const { HarmonicHash } = require('@web3codex/codexauth');
-
-const hasher = new HarmonicHash({
-  sacredMatrix: 12,
-  temporalDynamics: true,
+// 1. Login — returns a zone-aware, TIU time-locked session
+const session: AuthSession = await auth.login({
+  identifier: 'user@example.com',
+  password: 'secret',
 });
 
-// Generate a quantum-resistant hash
-const input = 'Hello, CodexAuth!';
-const hash = await hasher.generate(input);
-console.log(hash);
-// → "9a7f5e2d8c1b6e4f3a9d7c2e8b1f5a6c..."
+console.log(session.zone);  // "Z4"
+console.log(session.token); // "eyJhbGci..."
 
-// Verify hash integrity
-const isValid = await hasher.verify(input, hash);
-console.log(isValid); // true`,
+// 2. Verify server-side (e.g. in middleware)
+const claims = await auth.verify(session.token);
+if (!claims.valid) throw new Error(claims.reason);
 
-  python: `from codexauth import HarmonicHash
+// 3. Enforce zone policy
+if (parseInt(claims.zone.slice(1)) < 4) {
+  throw new Error('Insufficient zone level');
+}
 
-hasher = HarmonicHash(
-    sacred_matrix=12,
-    temporal_dynamics=True,
-)
+// 4. Refresh before TIU window expires
+const refreshed = await auth.refresh(session.refreshToken);`,
 
-# Generate a quantum-resistant hash
-input_data = "Hello, CodexAuth!"
-hash_value = hasher.generate(input_data)
-print(hash_value)
-# → "9a7f5e2d8c1b6e4f3a9d7c2e8b1f5a6c..."
+  javascript: `const { CodexAuthClient } = require('@web3connected/codexauth-sdk');
 
-# Verify hash integrity
-is_valid = hasher.verify(input_data, hash_value)
-print(is_valid)  # True`,
+const auth = new CodexAuthClient({
+  apiUrl: 'https://codexauth.web3connected.com/api',
+  appId: process.env.CODEXAUTH_APP_ID,
+});
+
+// 1. Login
+const session = await auth.login({
+  identifier: 'user@example.com',
+  password: 'secret',
+});
+
+console.log(session.zone);  // "Z4"
+console.log(session.token); // "eyJhbGci..."
+
+// 2. Verify & use claims
+const claims = await auth.verify(session.token);
+console.log(claims.valid); // true
+
+// 3. Protected API call
+const profile = await auth.get('/users/me', session.token);
+console.log(profile.data);`,
 };
 
 export const gettingStartedInstallCommands: InstallCommand[] = [
-  { manager: 'npm',  command: 'npm install @web3codex/codexauth' },
-  { manager: 'yarn', command: 'yarn add @web3codex/codexauth' },
-  { manager: 'pnpm', command: 'pnpm add @web3codex/codexauth' },
-  { manager: 'pip',  command: 'pip install codexauth' },
+  { manager: 'npm',  command: 'npm install @web3connected/codexauth-sdk' },
+  { manager: 'yarn', command: 'yarn add @web3connected/codexauth-sdk' },
+  { manager: 'pnpm', command: 'pnpm add @web3connected/codexauth-sdk' },
 ];
 
 // ─── CTA ─────────────────────────────────────────────────────────────────────
 export const gettingStartedCtaButtons: CtaButton[] = [
   { label: 'Read the Documentation', href: '/docs', primary: true },
-  { label: 'Try API Explorer',        href: '/api-explorer' },
+  { label: 'View API Reference',      href: '/docs#api-reference' },
 ];

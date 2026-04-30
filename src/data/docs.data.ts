@@ -10,18 +10,17 @@ export interface DocNavItem {
 }
 
 export const docsNavItems: DocNavItem[] = [
-  { id: 'overview',        label: 'Overview',              iconName: 'Book'     },
-  { id: 'chaining',        label: 'Hash Chaining',         iconName: 'Link'     },
-  { id: 'tiu',             label: 'Time-Bound Hashing',    iconName: 'Clock'    },
-  { id: 'security-tiers',  label: 'Security Tiers',        iconName: 'Shield'   },
-  { id: 'replay',          label: 'Replay Prevention',     iconName: 'Lock'     },
-  { id: 'fork-detection',  label: 'Fork Detection',        iconName: 'GitFork'  },
-  { id: 'api-reference',   label: 'API Reference',         iconName: 'Code'     },
-  { id: 'examples',        label: 'Code Examples',         iconName: 'Play'     },
+  { id: 'overview',       label: 'Overview',          iconName: 'Book'    },
+  { id: 'authentication', label: 'Authentication',    iconName: 'Lock'    },
+  { id: 'sessions',       label: 'Sessions & Tokens', iconName: 'Clock'   },
+  { id: 'zones',          label: 'Zone Enforcement',  iconName: 'Shield'  },
+  { id: 'device-trust',   label: 'Device Trust',      iconName: 'Monitor' },
+  { id: 'api-reference',  label: 'API Reference',     iconName: 'Code'    },
+  { id: 'examples',       label: 'Code Examples',     iconName: 'Play'    },
 ];
 
 // ---------------------------------------------------------------------------
-// Hash Chaining — chain event steps
+// Auth Flow — step-by-step login chain
 // ---------------------------------------------------------------------------
 export interface ChainStep {
   step: number;
@@ -33,26 +32,29 @@ export interface ChainStep {
 export const chainSteps: ChainStep[] = [
   {
     step: 1,
-    title: 'First Event',
-    formula: 'event_hash₁ = SHA256(payload_hash₁ + "" + context)',
-    description: 'The first event has no predecessor. prev_event_hash is empty string.',
+    title: 'Submit Credentials',
+    description:
+      'Client POSTs identifier + password to /api/auth/login. The identifier is normalized and the password is verified against the stored CodexHarmonicHash — no plain bcrypt.',
   },
   {
     step: 2,
-    title: 'Subsequent Events',
-    formula: 'event_hash₂ = SHA256(payload_hash₂ + event_hash₁ + context)',
-    description: 'Every new event embeds the previous event\'s hash in its own computation.',
+    title: 'Zone & Device Evaluation',
+    formula: 'zone = CodexSecure.evaluate(device_context, ip, user_flags)',
+    description:
+      'CodexSecure inspects the device fingerprint, IP reputation, and user flags to assign a zone level (Z1–Z12). Higher zones grant broader access.',
   },
   {
     step: 3,
-    title: 'Tamper Detection',
-    description: 'Altering any event recomputes that event\'s hash — which no longer matches the next event\'s stored prev_event_hash. The chain breaks immediately and detectably.',
+    title: 'TIU Anchor Issued',
+    formula: 'tiu = CodexTime.currentTIU()',
+    description:
+      'A Time Interval Unit is fetched from CodexTime and embedded in the JWT payload. This binds the token to a precise time window — tokens from expired windows are rejected without a DB lookup.',
   },
   {
     step: 4,
-    title: 'Chain Verification',
-    formula: 'verify: recompute event_hashₙ and compare to stored value',
-    description: 'Verification re-runs each computation in sequence. Any mismatch pinpoints the exact tampered event.',
+    title: 'JWT Signed & Returned',
+    description:
+      'A signed JWT is returned containing the zone claim, TIU anchor, user ID, and expiry. A refresh token is issued separately for silent renewal.',
   },
 ];
 
@@ -62,15 +64,15 @@ export interface ChainBreaker {
 }
 
 export const chainBreakers: ChainBreaker[] = [
-  { cause: 'Data alteration',      explanation: 'Payload hash changes → event hash changes → next link breaks' },
-  { cause: 'Event insertion',      explanation: 'New event shifts all subsequent prev_event_hash pointers'     },
-  { cause: 'Event reordering',     explanation: 'Order reversal produces wrong prev_event_hash chain'         },
-  { cause: 'Time anchor reuse',    explanation: 'Replayed TIU value detected by temporal sequence check'      },
-  { cause: 'Domain context swap',  explanation: 'Different context tag produces different hash value'         },
+  { cause: 'Expired TIU window',     explanation: 'Token TIU is outside the valid time band — rejected without DB lookup'          },
+  { cause: 'Zone claim mismatch',    explanation: 'Route requires Z5 but token carries Z2 — access denied by middleware'           },
+  { cause: 'Device fingerprint drift', explanation: 'Device context changed since issuance — session flagged for re-evaluation'    },
+  { cause: 'Revoked refresh token',  explanation: 'Refresh token found in revocation list — full re-login required'                },
+  { cause: 'Credential hash tamper', explanation: 'Stored hash chain broken — account locked pending integrity check'              },
 ];
 
 // ---------------------------------------------------------------------------
-// Security Tiers
+// Security Tiers (Zone levels) — shaped to match SecurityTierItem interface
 // ---------------------------------------------------------------------------
 export interface SecurityTier {
   name: string;
@@ -86,40 +88,40 @@ export interface SecurityTier {
 
 export const securityTiers: SecurityTier[] = [
   {
-    name: 'Commercial',
-    badge: 'Standard',
+    name: 'Public',
+    badge: 'Z1–Z3',
+    bits: 0,
+    bytes: 0,
+    hexChars: 0,
+    rounds: 0,
+    useCases: ['Public API reads', 'Marketing pages', 'Unverified registrations'],
+    example: 'zone: "Z1" — read-only, no credential required',
+  },
+  {
+    name: 'Authenticated',
+    badge: 'Z4–Z7',
     bits: 256,
     bytes: 32,
     hexChars: 64,
     rounds: 8,
-    useCases: ['Consumer apps', 'Performance-critical systems', 'General data integrity', 'Session tokens'],
-    example: '7bfad6a04c0c37a2d8717354ccf907c54ccca38df49b1e247c58b254a19466c9',
+    useCases: ['Dashboard access', 'User profile management', 'Standard API calls', 'Web3 wallet actions'],
+    example: 'zone: "Z4" — authenticated session, TIU-locked JWT',
+    highlight: true,
   },
   {
-    name: 'Enterprise',
-    badge: 'Compliance-Grade',
+    name: 'Elevated',
+    badge: 'Z8–Z12',
     bits: 512,
     bytes: 64,
     hexChars: 128,
     rounds: 16,
-    useCases: ['SOC2 compliance', 'HIPAA data', 'GDPR environments', 'Financial audit trails'],
-    example: 'ab569798d160ef6bcdc9d6ddc17277884af96a27bdbcedc9d7c541c948271bfe5acd6116c260e60876f15281258958d7a...',
-    highlight: true,
-  },
-  {
-    name: 'Government',
-    badge: 'Defense-Grade',
-    bits: 1024,
-    bytes: 128,
-    hexChars: 256,
-    rounds: 24,
-    useCases: ['Critical infrastructure', 'Defense applications', 'National security systems', 'Harmonic Lock enabled'],
-    example: 'c492634b839a5120b1b7e21b210e81842253ece51f5e7d8a4fdc9ac0b708e8f0f5ab23c5d870aba6567f...',
+    useCases: ['Admin panels', 'Billing changes', 'Security settings', 'Compliance-gated operations'],
+    example: 'zone: "Z8" — MFA step-up required, device-pinned session',
   },
 ];
 
 // ---------------------------------------------------------------------------
-// Replay prevention — domain context inputs
+// Context inputs — what goes into each JWT
 // ---------------------------------------------------------------------------
 export interface ContextInput {
   field: string;
@@ -129,15 +131,15 @@ export interface ContextInput {
 }
 
 export const contextInputs: ContextInput[] = [
-  { field: 'event_data',     required: true,  example: '"Alice approves $100"',      purpose: 'The payload being hashed'              },
-  { field: 'tiu',            required: true,  example: '0.618034',                   purpose: 'Time anchor — changes per time window'  },
-  { field: 'prev_event_hash',required: true,  example: '"b5a82e40abea..."',           purpose: 'Cryptographic link to previous event'   },
-  { field: 'domain_context', required: true,  example: '"CONTEXT|transfer|USD|"',    purpose: 'Scopes hash to specific operation type'  },
-  { field: 'actor_identity', required: false, example: '"user_alice|session_xyz"',   purpose: 'Ties hash to specific actor (optional)'  },
+  { field: 'sub',         required: true,  example: '"usr_a7b3c9d2e4f5"',       purpose: 'User identifier'                            },
+  { field: 'zone',        required: true,  example: '"Z4"',                     purpose: 'Zone claim from CodexSecure evaluation'      },
+  { field: 'tiu',         required: true,  example: '0.618034',                 purpose: 'TIU anchor — valid only within time window'  },
+  { field: 'device_hash', required: false, example: '"b5a82e40abea..."',        purpose: 'Device fingerprint for trust validation'     },
+  { field: 'exp',         required: true,  example: '1798761600',               purpose: 'Standard JWT expiry (Unix timestamp)'        },
 ];
 
 // ---------------------------------------------------------------------------
-// Fork detection — detection methods
+// Device trust — evaluation methods
 // ---------------------------------------------------------------------------
 export interface ForkMethod {
   name: string;
@@ -147,21 +149,27 @@ export interface ForkMethod {
 
 export const forkMethods: ForkMethod[] = [
   {
-    name: 'Compare Hash Sequences',
-    description: 'Walk both chains in parallel and find the first position where hashes diverge.',
-    code: `def detect_fork(chain_a, chain_b):
-    for i in range(min(len(chain_a), len(chain_b))):
-        if chain_a[i].event_hash != chain_b[i].event_hash:
-            return i  # Fork point index
-    return None  # No fork`,
+    name: 'Fingerprint Check',
+    description: 'Compare current device fingerprint against the hash stored at login time. Any drift triggers re-evaluation.',
+    code: `const current = await DeviceTrust.fingerprint(req);
+const stored = session.device_hash;
+
+if (!DeviceTrust.matches(current, stored)) {
+  // Re-evaluate zone — may downgrade trust
+  session.zone = await CodexSecure.reEvaluate(current);
+}`,
   },
   {
-    name: 'Temporal Anomaly Check',
-    description: 'Any event with a TIU ≤ its predecessor indicates a time reversal — possible fork boundary.',
-    code: `for i, event in enumerate(chain[1:], 1):
-    if event.tiu <= chain[i-1].tiu:
-        print(f"Time anomaly at position {i}")
-        # Potential fork boundary`,
+    name: 'IP Reputation Check',
+    description: 'Cross-reference client IP against the CodexSecure reputation feed. High-risk IPs are downgraded to Z1.',
+    code: `const rep = await CodexSecure.ipReputation(req.ip);
+
+if (rep.risk === 'high') {
+  throw new UnauthorizedError('IP blocked by zone policy');
+}
+
+// Adjust zone ceiling based on reputation score
+const maxZone = rep.zoneAllowance; // e.g. "Z6"`,
   },
 ];
 
@@ -172,14 +180,14 @@ export interface RecoveryOption {
 }
 
 export const forkRecoveryOptions: RecoveryOption[] = [
-  { strategy: 'Accept Main',   when: 'Clear authority exists',         action: 'Discard the fork branch; re-hash from the split point'    },
-  { strategy: 'Merge Events',  when: 'Both branches contain real data', action: 'Deterministic merge by timestamp; rebuild chain after'    },
-  { strategy: 'Archive Fork',  when: 'Audit trail required',           action: 'Store fork branch as evidence; continue main chain'       },
-  { strategy: 'Root Cause',    when: 'Always',                         action: 'Investigate the write conflict that produced the fork'     },
+  { strategy: 'Re-login',         when: 'TIU expired or zone downgraded',    action: 'Prompt user to authenticate again; issue fresh session'   },
+  { strategy: 'Silent Refresh',   when: 'Token near expiry, device unchanged', action: 'Use refresh token to issue new JWT without re-login'    },
+  { strategy: 'Step-up Auth',     when: 'Operation requires higher zone',    action: 'Challenge user (MFA) to elevate zone mid-session'        },
+  { strategy: 'Account Lock',     when: 'Credential hash chain broken',      action: 'Lock account; alert security team for integrity review'   },
 ];
 
 // ---------------------------------------------------------------------------
-// API endpoints (real endpoints from CODEXHASH_API_REFERENCE.md)
+// API endpoints (codexauth.web3connected.com/api)
 // ---------------------------------------------------------------------------
 export interface ApiParam {
   name: string;
@@ -198,59 +206,53 @@ export interface ApiEndpoint {
 export const apiEndpoints: ApiEndpoint[] = [
   {
     method: 'POST',
-    endpoint: '/api/hash/',
-    description: 'Create a new hash event with tamper-evident chaining. Returns the event_hash linked to the previous event.',
+    endpoint: '/api/auth/login',
+    description: 'Authenticate a user. Returns a zone-aware, TIU time-locked JWT and a refresh token.',
     parameters: [
-      { name: 'data',    type: 'string', required: true,  description: 'Raw input data to hash'                         },
-      { name: 'mode',    type: 'string', required: false, description: '"quick" | "standard" | "secure" (default: quick)'},
-      { name: 'algo',    type: 'string', required: false, description: '"sha256" | "sha512" | "harmonic"'               },
-      { name: 'context', type: 'object', required: false, description: 'Additional metadata embedded in the chain hash' },
-    ],
-  },
-  {
-    method: 'GET',
-    endpoint: '/api/hash/',
-    description: 'List hash events (chain history) with optional filters.',
-    parameters: [
-      { name: 'limit',  type: 'int',    required: false, description: 'Max events to return (default: 50)' },
-      { name: 'offset', type: 'int',    required: false, description: 'Pagination offset (default: 0)'     },
-      { name: 'mode',   type: 'string', required: false, description: 'Filter by mode'                     },
-      { name: 'algo',   type: 'string', required: false, description: 'Filter by algorithm'                },
+      { name: 'identifier', type: 'string', required: true,  description: 'Email address or username'                       },
+      { name: 'password',   type: 'string', required: true,  description: 'User password (verified via CodexHarmonicHash)'  },
+      { name: 'device',     type: 'object', required: false, description: 'Device context for zone evaluation'              },
     ],
   },
   {
     method: 'POST',
-    endpoint: '/api/hash/verify',
-    description: 'Verify chain integrity — recomputes event hashes and detects any tampered link.',
+    endpoint: '/api/auth/logout',
+    description: 'Revoke the current session. Adds the refresh token to the revocation list.',
     parameters: [
-      { name: 'event_id',        type: 'string',  required: false, description: 'Specific event ID to verify (or verify full chain)'  },
-      { name: 'recompute_chain', type: 'boolean', required: false, description: 'Walk full chain if true (default: false)'             },
-    ],
-  },
-  {
-    method: 'GET',
-    endpoint: '/api/hash/metrics',
-    description: 'Usage statistics broken down by mode and algorithm.',
-    parameters: [
-      { name: 'from', type: 'string', required: false, description: 'ISO 8601 start date filter' },
-      { name: 'to',   type: 'string', required: false, description: 'ISO 8601 end date filter'   },
+      { name: 'refresh_token', type: 'string', required: true, description: 'Refresh token to revoke' },
     ],
   },
   {
     method: 'POST',
-    endpoint: '/api/hash/generate',
-    description: 'Generate a standalone CodexHarmonicHash (used internally by CodexAuth for password hashing).',
+    endpoint: '/api/auth/refresh',
+    description: 'Exchange a valid refresh token for a new JWT. Validates TIU window and device context.',
     parameters: [
-      { name: 'data',    type: 'string', required: true,  description: 'Data to hash'                                    },
-      { name: 'tier',    type: 'string', required: false, description: '"commercial" | "enterprise" | "government"'       },
-      { name: 'tiu',     type: 'float',  required: false, description: 'Time Integrity Unit (0.0–1.0)'                    },
-      { name: 'rounds',  type: 'int',    required: false, description: 'Mixing rounds (8 commercial, 16 ent, 24 govt)'    },
+      { name: 'refresh_token', type: 'string', required: true,  description: 'Refresh token issued at login'  },
+      { name: 'device',        type: 'object', required: false, description: 'Updated device context'          },
+    ],
+  },
+  {
+    method: 'POST',
+    endpoint: '/api/auth/verify',
+    description: 'Verify a JWT. Checks signature, TIU window, zone claim, and revocation status.',
+    parameters: [
+      { name: 'token', type: 'string', required: true, description: 'JWT to verify' },
+    ],
+  },
+  {
+    method: 'POST',
+    endpoint: '/api/auth/register',
+    description: 'Register a new user account. Password is hashed with CodexHarmonicHash before storage.',
+    parameters: [
+      { name: 'identifier', type: 'string', required: true,  description: 'Email or username'   },
+      { name: 'password',   type: 'string', required: true,  description: 'Password to hash'    },
+      { name: 'metadata',   type: 'object', required: false, description: 'Additional user info' },
     ],
   },
   {
     method: 'GET',
     endpoint: '/health',
-    description: 'Service health check including database connectivity.',
+    description: 'Service health check including database and CodexTime connectivity.',
     parameters: [],
   },
 ];
@@ -267,112 +269,90 @@ export interface CodeExample {
 
 export const codeExamples: CodeExample[] = [
   {
-    id: 'create-event',
-    title: 'Create Hash Event',
+    id: 'login',
+    title: 'Login',
     language: 'bash',
-    code: `# Create a tamper-evident hash event (chains to previous automatically)
-curl -X POST https://codexauth.io/api/hash/ \\
+    code: `# Authenticate and receive a TIU time-locked JWT
+curl -X POST https://codexauth.web3connected.com/api/auth/login \\
   -H "Content-Type: application/json" \\
   -d '{
-    "data": "Invoice #1042 — Alice approved $500 transfer",
-    "mode": "secure",
-    "algo": "harmonic",
-    "context": { "actor": "alice", "operation": "transfer" }
+    "identifier": "user@example.com",
+    "password": "secret",
+    "device": { "fingerprint": "abc123", "user_agent": "..." }
   }'
 
 # Response:
 # {
-#   "id": "a8d1ddee-79e9-4ca0-8156-ac0413d10583",
-#   "payload_hash": "c9ababd6...",
-#   "prev_event_hash": "b5a82e40...",
-#   "event_hash": "9c220574...",
-#   "mode": "secure",
-#   "algo": "harmonic",
-#   "created_at": "2026-04-26T10:14:22"
+#   "token": "eyJhbGci...",
+#   "refresh_token": "rt_a7b3c9...",
+#   "zone": "Z4",
+#   "expires_in": 3600
 # }`,
   },
   {
-    id: 'verify-chain',
-    title: 'Verify Chain Integrity',
+    id: 'verify',
+    title: 'Verify Token',
     language: 'bash',
-    code: `# Verify full chain — recomputes all event hashes in sequence
-curl -X POST https://codexauth.io/api/hash/verify \\
+    code: `# Verify a JWT server-side
+curl -X POST https://codexauth.web3connected.com/api/auth/verify \\
   -H "Content-Type: application/json" \\
-  -d '{ "recompute_chain": true }'
+  -d '{ "token": "eyJhbGci..." }'
 
-# Response when chain is intact:
-# { "valid": true, "events_checked": 142, "broken_at": null }
+# Valid response:
+# { "valid": true, "zone": "Z4", "sub": "usr_a7b3c9", "tiu_ok": true }
 
-# Response when tamper detected:
-# {
-#   "valid": false,
-#   "events_checked": 142,
-#   "broken_at": {
-#     "position": 87,
-#     "event_id": "f3c9...",
-#     "expected_hash": "a7f4d9...",
-#     "stored_hash": "bb2c11..."
-#   }
-# }`,
+# Invalid (expired TIU):
+# { "valid": false, "reason": "tiu_expired" }`,
   },
   {
-    id: 'js-chaining',
-    title: 'JavaScript — Chain Events',
+    id: 'js-login',
+    title: 'JavaScript — Login Flow',
     language: 'javascript',
-    code: `import { CodexAuthClient } from '@web3codex/codexauth-sdk';
+    code: `import { CodexAuthClient } from '@web3connected/codexauth-sdk';
 
-const client = new CodexAuthClient({ baseUrl: 'https://codexauth.io' });
-
-// Create first event
-const event1 = await client.createEvent({
-  data: 'Contract signed by Alice',
-  mode: 'secure',
-  context: { actor: 'alice', doc: 'contract-v2' }
+const auth = new CodexAuthClient({
+  apiUrl: 'https://codexauth.web3connected.com/api',
+  appId: process.env.CODEXAUTH_APP_ID,
 });
-// event1.prev_event_hash === null (genesis)
-// event1.event_hash === "7bfad6a0..."
 
-// Create chained event (automatically uses event1.event_hash as prev)
-const event2 = await client.createEvent({
-  data: 'Contract counter-signed by Bob',
-  mode: 'secure',
-  context: { actor: 'bob', doc: 'contract-v2' }
+// Login
+const session = await auth.login({
+  identifier: 'user@example.com',
+  password: 'secret',
 });
-// event2.prev_event_hash === event1.event_hash ✅ chain linked`,
+
+console.log(session.zone);  // "Z4"
+console.log(session.token); // "eyJhbGci..."
+
+// Call a protected endpoint using the token
+const data = await auth.get('/users/me', session.token);`,
   },
   {
-    id: 'php-generate',
-    title: 'PHP — Generate HarmonicHash',
-    language: 'php',
-    code: `<?php
-use Web3Codex\\CodexAuth\\Services\\CodexHarmonicHash;
-use Web3Codex\\CodexTime\\Services\\CodexTime;
+    id: 'js-verify',
+    title: 'JavaScript — Server-side Verification',
+    language: 'javascript',
+    code: `import { CodexAuthClient } from '@web3connected/codexauth-sdk';
 
-$hasher    = new CodexHarmonicHash();
-$codexTime = new CodexTime();
-$tiu       = $codexTime->getTIU();  // temporal anchor
+const auth = new CodexAuthClient({
+  apiUrl: 'https://codexauth.web3connected.com/api',
+  appId: process.env.CODEXAUTH_APP_ID,
+});
 
-// Enterprise tier (512-bit, 16 rounds)
-$result = $hasher->hash(
-    data:   'Sensitive user record',
-    tier:   'enterprise',
-    tiu:    $tiu,
-    rounds: 16
-);
+// Middleware: verify token on every protected request
+export async function authMiddleware(req, res, next) {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  if (!token) return res.status(401).json({ error: 'No token' });
 
-// $result['hash']  — 128 hex chars (512-bit)
-// $result['salt']  — generated salt
-// $result['tiu']   — embedded time anchor
+  const claims = await auth.verify(token);
+  if (!claims.valid) return res.status(401).json({ error: claims.reason });
 
-$valid = $hasher->verify(
-    data:  'Sensitive user record',
-    hash:  $result['hash'],
-    salt:  $result['salt'],
-    tiu:   $result['tiu'],
-    rounds: 16
-);
-var_dump($valid); // bool(true)`,
+  // Enforce zone policy
+  if (parseInt(claims.zone.slice(1)) < 4) {
+    return res.status(403).json({ error: 'Insufficient zone' });
+  }
+
+  req.user = claims;
+  next();
+}`,
   },
 ];
-
-// ---------------------------------------------------------------------------
