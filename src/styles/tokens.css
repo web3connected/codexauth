@@ -1,0 +1,172 @@
+/**
+ * Web3 Codex Unified Design System
+ * 
+ * This is the master design system that will be shared across all Web3 Codex sites
+ * except the admin site (which uses AdminLTE with Tailwind).
+ * 
+ * Architecture:
+ * - CSS Custom Properties for theme variables
+ * - Tailwind CSS for utility classes
+ * - Component-based design system
+ * - Theme switching capabilities
+ * - Responsive design patterns
+ */
+
+:root {
+  /* === BRAND COLORS (RGB channels for Tailwind compatibility) === */
+  --color-primary-theme: 28 36 48;      /* Web3 */
+  --color-secondary-theme: 17 70 163;    /* Secondary blue */
+  --color-trinary: 217 230 49;           /* Accent yellow-green */
+  --color-background: 10 15 28;          /* Deep background */
+  --color-foreground: 247 250 252;       /* Light text */
+  --color-surface: 28 36 48;             /* Surface background */
+  --color-surface-light: 42 52 65;       /* Light surface background */
+
+  /* === BRAND IDENTITY COLORS === */
+  --color-brand-codex: 175 71 11;        /* Connected orange */
+  --color-brand-identity: 79 112 150;    /* Identity blue */
+  --color-brand-secure: 64 81 104;       /* Secure blue-gray */
+  --color-brand-voice: 120 113 108;      /* Voice warm gray */
+  --color-brand-time: 76 91 124;         /* Time blue-gray */
+  --color-brand-harmonics: 139 90 135;   /* Harmonics purple */
+  --color-brand-resonance: 107 142 71;   /* Resonance green */
+  --color-brand-mind: 184 134 11;        /* Mind golden */
+  --color-brand-universe: 2 36 70;       /* Universe dark blue */
+  --color-brand-factor: 251 191 36;      /* Ecosystem yellow */
+
+  /* === GRADIENTS === */
+  --gradient-primary: linear-gradient(135deg, rgb(var(--color-primary-theme)), rgb(var(--color-secondary-theme)));
+  --gradient-brand: linear-gradient(135deg, rgb(var(--color-brand-codex)), rgb(var(--color-trinary)));
+  --gradient-glass: linear-gradient(135deg, rgba(28, 36, 48, 0.95), rgba(17, 70, 163, 0.95));
+
+  /* === SEMANTIC COLORS === */
+  --color-success: 5 150 105;
+  --color-warning: 217 119 6;
+  --color-error: 220 38 38;
+  --color-info: 37 99 235;
+
+  /* === THEME VARIABLES === */
+  --bg: var(--color-background);
+  --fg: var(--color-foreground);
+  --muted: #97a3b6;
+  --primary: var(--color-secondary-theme);
+  --accent: var(--color-trinary);
+
+  /* === SPACING SCALE === */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+
+  /* === TYPOGRAPHY === */
+  --font-family-brand: 'Orbitron', 'Courier New', monospace;
+  --font-family-heading: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-family-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.875rem;    /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+  --font-size-5xl: 3rem;       /* 48px */
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* === BORDER RADIUS === */
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.375rem;   /* 6px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-2xl: 1rem;      /* 16px */
+  --radius-full: 9999px;
+
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(64, 81, 100, 0.3);
+  --shadow-glow-brand: 0 0 20px rgba(175, 71, 11, 0.3);
+
+  /* === TRANSITIONS === */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* === Z-INDEX SCALE === */
+  --z-behind: -1;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-overlay: 20;
+  --z-modal: 30;
+  --z-popover: 40;
+  --z-tooltip: 50;
+  --z-toast: 60;
+
+  /* === GLASS MORPHISM === */
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-backdrop: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+
+  /* === LAYOUT === */
+  --container-max-width: 1200px;
+  --sidebar-width: 280px;
+  --header-height: 80px;
+}
+
+/* === DARK THEME VARIANTS === */
+.dark {
+  --color-background: 10 15 28;
+  --color-foreground: 247 250 252;
+  --color-surface: 28 36 48;
+  --color-surface-light: 42 52 65;
+}
+
+/* === LIGHT THEME VARIANTS === */
+.light {
+  --color-background: 255 255 255;
+  --color-foreground: 26 32 44;
+  --color-surface: 247 250 252;
+  --color-surface-light: 237 242 247;
+}
+
+/* === BASE STYLES === */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--fg);
+  background-color: var(--bg);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

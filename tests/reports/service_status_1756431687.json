@@ -1,0 +1,71 @@
+{
+  "CodexTime": {
+    "status": "\ud83d\udfe2 HEALTHY",
+    "description": "Universal time synchronization",
+    "data": {
+      "status": "healthy",
+      "server_id": "codex-time-001",
+      "uptime": 1756431687.81581,
+      "last_sync": 1756431588.105344,
+      "system": {
+        "cpu_usage": 12.7,
+        "memory_usage": 82.6,
+        "memory_available": 1439502336,
+        "load_avg": [
+          0.658203125,
+          0.611328125,
+          0.5224609375
+        ]
+      }
+    }
+  },
+  "CodexAuth MCP": {
+    "status": "\ud83d\udfe2 HEALTHY",
+    "description": "MCP gateway for temporal hashing",
+    "data": {
+      "status": "healthy",
+      "service": "CodexAuth",
+      "version": "1.0.0",
+      "policyVersion": "codexauth/1.2.0",
+      "buildHash": "sha256:codex-hash-mcp-v1.0.0",
+      "timestamp": "2025-08-29T01:41:27.818Z"
+    }
+  },
+  "CodexAuth Bridge": {
+    "status": "\ud83d\udfe2 HEALTHY",
+    "description": "Python-TypeScript bridge",
+    "data": {
+      "status": "healthy",
+      "service": "CodexAuth Python Bridge",
+      "version": "1.0.0",
+      "python_implementation": true,
+      "time_server_available": false,
+      "timestamp": "2025-08-29T01:41:27.819992Z"
+    }
+  },
+  "CodexAuth Core": {
+    "status": "\ud83d\udfe2 FUNCTIONAL",
+    "test_hash": "CodexAuthResult(hash_value='76392d5215a2eee8862e24c663880f30424a122b2b238092713246337b5a4591', salt='776e07a3ac337279b0632442e7216fd05def8c7778ef90cbd9254ad5f5e700aa', tiu=0.13519, rounds=1000, execution_time_ns=1238973, base_frequency=1.927982247564183e+20, entropy_score=0.28033, metadata={'mode': 'non_deterministic', 'precision': 6}, entropy_modifier=0.28033, harmonic_pressure=0.0, salt_entropy=0.25, calculation_metadata={'mode': 'non_deterministic', 'base_frequency': 1.927982247564183e+20, 'combined_data_length': 97, 'data_bytes_length': 97, 'tiu_string': '0.135190', 'harmonic_calculations': {'entropy_modifier': 0.28033, 'harmonic_pressure': 0.0, 'base_frequency': 1.927982247564183e+20}, 'statistics': {'total_hashes': 1, 'total_time_ns': 1238973, 'avg_time_ns': 1238973.0}})",
+    "tiu_value": "N/A"
+  },
+  "CodexMind": {
+    "status": "\ud83d\udfe2 PRESENT",
+    "path": "/home/web3codex/projects/codex_mind"
+  },
+  "CodexSecure": {
+    "status": "\ud83d\udfe2 PRESENT",
+    "path": "/home/web3codex/projects/codex_secure"
+  },
+  "CodexIdentity": {
+    "status": "\ud83d\udfe2 PRESENT",
+    "path": "/home/web3codex/projects/codex_identity"
+  },
+  "CodexAdmin": {
+    "status": "\ud83d\udfe2 PRESENT",
+    "path": "/home/web3codex/projects/codex_admin"
+  },
+  "CodexCache": {
+    "status": "\ud83d\udfe2 PRESENT",
+    "path": "/home/web3codex/projects/codex_cache"
+  }
+}

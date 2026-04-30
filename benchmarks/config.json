@@ -1,0 +1,134 @@
+{
+  "test_configurations": {
+    "quick": {
+      "description": "Quick test for development/CI",
+      "sizes": [32, 1024, 1048576],
+      "trials": 1000,
+      "duration_s": 1.0,
+      "thread_counts": [1, 2, 4],
+      "cryptographic_tests": {
+        "uniformity_samples": 10000,
+        "correlation_samples": 1000,
+        "collision_attempts": 100000
+      }
+    },
+    "standard": {
+      "description": "Standard benchmark for regular testing",
+      "sizes": [32, 1024, 1048576, 104857600],
+      "trials": 100000,
+      "duration_s": 3.0,
+      "thread_counts": [1, 2, 4, 8, 16],
+      "cryptographic_tests": {
+        "uniformity_samples": 100000,
+        "correlation_samples": 10000,
+        "collision_attempts": 1000000
+      }
+    },
+    "comprehensive": {
+      "description": "Comprehensive benchmark for publication/release",
+      "sizes": [1, 8, 16, 32, 64, 128, 256, 512, 1024, 4096, 16384, 65536, 262144, 1048576, 16777216, 104857600, 1073741824],
+      "trials": 1000000,
+      "duration_s": 10.0,
+      "thread_counts": [1, 2, 4, 8, 16, 32],
+      "cryptographic_tests": {
+        "uniformity_samples": 1000000,
+        "correlation_samples": 100000,
+        "collision_attempts": 10000000
+      }
+    },
+    "stress": {
+      "description": "Stress test for finding edge cases",
+      "sizes": [1, 2, 3, 4, 5, 7, 8, 15, 16, 17, 31, 32, 33, 63, 64, 65, 127, 128, 129, 255, 256, 257, 511, 512, 513, 1023, 1024, 1025],
+      "trials": 100000,
+      "duration_s": 5.0,
+      "thread_counts": [1, 2, 4, 8, 16],
+      "adversarial_inputs": true,
+      "cryptographic_tests": {
+        "uniformity_samples": 500000,
+        "correlation_samples": 50000,
+        "collision_attempts": 5000000
+      }
+    }
+  },
+  "acceptance_criteria": {
+    "determinism": {
+      "description": "Same input must always produce same output",
+      "failure_tolerance": 0,
+      "blocker": true
+    },
+    "avalanche_effect": {
+      "description": "Single bit flip should change ~50% of output bits",
+      "target_ratio": 0.5,
+      "acceptable_range": [0.48, 0.52],
+      "standard_deviation_max": 0.05,
+      "blocker": true
+    },
+    "bit_balance": {
+      "description": "Each output bit should be 1 approximately 50% of the time",
+      "acceptable_range": [0.49, 0.51],
+      "min_pass_percentage": 95.0,
+      "blocker": true
+    },
+    "uniformity": {
+      "description": "Output bytes should be uniformly distributed",
+      "chi_square_critical_value": 293.25,
+      "blocker": false
+    },
+    "serial_correlation": {
+      "description": "Sequential output bytes should be uncorrelated",
+      "max_correlation": 0.01,
+      "blocker": false
+    },
+    "performance_vs_sha256": {
+      "description": "Performance should be within reasonable range of SHA-256",
+      "max_slowdown_factor": 10.0,
+      "blocker": false
+    },
+    "performance_vs_blake3": {
+      "description": "Performance should be within reasonable range of BLAKE3",
+      "max_slowdown_factor": 5.0,
+      "blocker": false
+    },
+    "thread_scalability": {
+      "description": "Should show reasonable scaling with thread count",
+      "min_scalability_2_threads": 1.5,
+      "min_scalability_4_threads": 2.0,
+      "blocker": false
+    }
+  },
+  "platform_requirements": {
+    "test_platforms": [
+      "linux-x86_64",
+      "linux-aarch64", 
+      "darwin-x86_64",
+      "darwin-arm64",
+      "windows-x86_64"
+    ],
+    "compilers": [
+      "gcc-9+",
+      "clang-10+",
+      "msvc-2019+"
+    ],
+    "node_versions": [
+      "16.x",
+      "18.x",
+      "20.x"
+    ]
+  },
+  "output_requirements": {
+    "formats": ["json", "csv"],
+    "plots": {
+      "throughput_vs_size": true,
+      "latency_distribution": true,
+      "scalability_chart": true,
+      "avalanche_distribution": true,
+      "bit_balance_chart": true
+    },
+    "reports": {
+      "executive_summary": true,
+      "detailed_results": true,
+      "comparison_table": true,
+      "platform_variance": true
+    }
+  }
+}

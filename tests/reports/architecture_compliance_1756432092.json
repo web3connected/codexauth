@@ -1,0 +1,118 @@
+{
+  "architecture_spec": "Pure-Python reference + drop-in bridge",
+  "timestamp": 1756432092.3717725,
+  "compliance_checks": {
+    "repo_layout": {
+      "component": "Repository Layout",
+      "checks": {
+        "src/codex_hash/__init__.py": {
+          "exists": true,
+          "description": "Python package initialization",
+          "status": "\u2705 PASS"
+        },
+        "src/codex_hash/core.py": {
+          "exists": true,
+          "description": "Unified interface implementation",
+          "status": "\u2705 PASS"
+        },
+        "tests/": {
+          "exists": true,
+          "description": "Test directory",
+          "status": "\u2705 PASS"
+        },
+        "benchmarks/": {
+          "exists": true,
+          "description": "Benchmark harness",
+          "status": "\u2705 PASS"
+        },
+        "mcp-servers/codex-hash-mcp/": {
+          "exists": true,
+          "description": "MCP server implementation",
+          "status": "\u2705 PASS"
+        }
+      }
+    },
+    "core_interface": {
+      "component": "Core Interface Compliance",
+      "checks": {
+        "hash": {
+          "exists": true,
+          "description": "Main hashing method",
+          "status": "\u2705 PASS"
+        },
+        "__init__": {
+          "exists": true,
+          "description": "Constructor",
+          "status": "\u2705 PASS"
+        },
+        "basic_functionality": {
+          "works": true,
+          "sample_hash": "CodexAuthResult(hash_value='a6db...",
+          "status": "\u2705 PASS"
+        }
+      }
+    },
+    "mcp_service": {
+      "component": "MCP Service Compliance",
+      "checks": {
+        "mcp_server_health": {
+          "status": "\u2705 RUNNING",
+          "response": {
+            "status": "healthy",
+            "service": "CodexAuth",
+            "version": "1.0.0",
+            "policyVersion": "codexauth/1.2.0",
+            "buildHash": "sha256:codex-hash-mcp-v1.0.0",
+            "timestamp": "2025-08-29T01:48:12.481Z"
+          }
+        }
+      }
+    },
+    "rest_fallback": {
+      "component": "REST API Compliance",
+      "checks": {
+        "rest_health": {
+          "status": "\u2705 RUNNING",
+          "response": {
+            "status": "healthy",
+            "service": "CodexAuth Python Bridge",
+            "version": "1.0.0",
+            "python_implementation": true,
+            "time_server_available": false,
+            "timestamp": "2025-08-29T01:48:12.484276Z"
+          }
+        },
+        "hash_endpoint": {
+          "status": "\u2705 FUNCTIONAL",
+          "sample_response": "{'hash': '647555e5bae1c7c02599e0e62464a1535c440eebac3eaeb8025ba68a017c1a91', 'salt': 'c36ef8979c1b47..."
+        }
+      }
+    },
+    "test_framework": {
+      "component": "Test Framework",
+      "checks": {
+        "tests/kat_manager.py": {
+          "exists": true,
+          "description": "KAT (Known Answer Tests)",
+          "status": "\u2705 PRESENT"
+        },
+        "tests/multi_service_testbed.py": {
+          "exists": true,
+          "description": "Multi-service integration tests",
+          "status": "\u2705 PRESENT"
+        },
+        "benchmarks/harness.py": {
+          "exists": true,
+          "description": "Benchmark harness",
+          "status": "\u2705 PRESENT"
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_checks": 14,
+    "passed_checks": 14,
+    "compliance_percentage": 100.0,
+    "overall_status": "\u2705 COMPLIANT"
+  }
+}

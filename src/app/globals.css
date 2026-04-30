@@ -1,0 +1,430 @@
+/* Web3 Codex Design System - CodexHash Theme */
+@import "tailwindcss";
+
+/* Note: Fonts loaded via Next.js layout.tsx (next/font/google) */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   ============================================ */
+:root {
+  /* === BRAND COLORS === */
+  --color-primary-theme: #1c2430;
+  --color-secondary-theme: #1146a3;
+  --color-trinary: #d9e631;
+  --color-background: #0a0f1c;
+  --color-foreground: #f7fafc;
+
+  /* === CODEXHASH SPECIFIC === */
+  --color-hash-primary: #2DF4A1;
+  --color-hash-secondary: #00E4FF;
+  --color-hash-accent: #FF6B35;
+  --color-hash-bg: #0F172A;
+  --color-hash-surface: #1E293B;
+  
+  /* === BRAND IDENTITY COLORS === */
+  --color-brand-codex: rgb(175, 71, 11);
+  --color-brand-hash: #2DF4A1;
+  --color-brand-identity: #4f7096;
+  --color-brand-secure: #405168;
+  --color-brand-time: #4c5b7c;
+  --color-brand-mind: #b8860b;
+
+  /* === GRADIENTS === */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-theme), var(--color-secondary-theme));
+  --gradient-hash: linear-gradient(135deg, var(--color-hash-primary), var(--color-hash-secondary));
+  --gradient-hash-accent: linear-gradient(135deg, var(--color-hash-accent), var(--color-hash-primary));
+  --gradient-glass: linear-gradient(135deg, rgba(28, 36, 48, 0.95), rgba(17, 70, 163, 0.95));
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-codex), var(--color-trinary));
+
+  /* === GLASS MORPHISM === */
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-backdrop: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+
+  /* === TYPOGRAPHY === */
+  --font-brand: 'Orbitron', 'Courier New', monospace;
+  --font-heading: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* === SPACING === */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* === BORDERS === */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-foreground);
+  background-color: var(--color-hash-bg);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(45, 244, 161, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 228, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 107, 53, 0.04) 0%, transparent 50%);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6,
+.heading-1, .heading-2, .heading-3,
+.display-1, .display-2, .display-3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.brand-text, .font-brand {
+  font-family: var(--font-brand);
+}
+
+.lead-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   LOGO COLOR CLASSES
+   ============================================ */
+.logo-codex-hash {
+  color: var(--color-hash-primary);
+}
+
+.logo-web3-codex {
+  color: var(--color-brand-codex);
+}
+
+.logo-codex-time {
+  color: var(--color-brand-time);
+}
+
+.logo-codex-identity {
+  color: var(--color-brand-identity);
+}
+
+.logo-codex-secure {
+  color: var(--color-brand-secure);
+}
+
+/* ============================================
+   GRADIENT TEXT CLASSES
+   ============================================ */
+.gradient-text-hash {
+  background: var(--gradient-hash);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-web3-gradient {
+  background: linear-gradient(135deg, #2DF4A1 0%, #00E4FF 50%, #FF6B35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.web3-codex-brand {
+  background: linear-gradient(135deg, var(--color-hash-primary) 0%, var(--color-hash-secondary) 50%, var(--color-hash-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   BACKGROUND GRADIENT CLASSES
+   ============================================ */
+.bg-gradient-hash {
+  background: var(--gradient-hash);
+}
+
+.bg-gradient-brand {
+  background: var(--gradient-brand);
+}
+
+.bg-gradient-time {
+  background: linear-gradient(135deg, var(--color-brand-time), var(--color-secondary-theme));
+}
+
+.bg-gradient-secure {
+  background: linear-gradient(135deg, var(--color-brand-secure), var(--color-secondary-theme));
+}
+
+.bg-gradient-identity {
+  background: linear-gradient(135deg, var(--color-brand-identity), var(--color-secondary-theme));
+}
+
+/* ============================================
+   TEXT COLOR CLASSES
+   ============================================ */
+.text-hash-primary {
+  color: var(--color-hash-primary);
+}
+
+.text-hash-secondary {
+  color: var(--color-hash-secondary);
+}
+
+.text-hash-accent {
+  color: var(--color-hash-accent);
+}
+
+.text-trinary {
+  color: var(--color-trinary);
+}
+
+/* ============================================
+   GLASS MORPHISM
+   ============================================ */
+.glass {
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--glass-border);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(45, 244, 161, 0.1);
+}
+
+/* ============================================
+   HASH CARD COMPONENT
+   ============================================ */
+.hash-card {
+  background: rgba(45, 244, 161, 0.05);
+  border: 1px solid rgba(45, 244, 161, 0.2);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.hash-card:hover {
+  border-color: rgba(45, 244, 161, 0.4);
+  box-shadow: 0 0 30px rgba(45, 244, 161, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   HASH BUTTON COMPONENTS
+   ============================================ */
+.hash-button {
+  background: var(--gradient-hash);
+  border: none;
+  color: #0F172A;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hash-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(45, 244, 161, 0.4);
+}
+
+.hash-button-outline {
+  background: transparent;
+  border: 2px solid var(--color-hash-primary);
+  color: var(--color-hash-primary);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hash-button-outline:hover {
+  background: var(--color-hash-primary);
+  color: #0F172A;
+}
+
+/* ============================================
+   CODE BLOCK STYLING
+   ============================================ */
+.code-block {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(45, 244, 161, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  overflow-x: auto;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.inline-code {
+  background: rgba(45, 244, 161, 0.1);
+  border: 1px solid rgba(45, 244, 161, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.125rem 0.375rem;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  color: var(--color-hash-primary);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes hashGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(45, 244, 161, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(45, 244, 161, 0.6);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.hash-glow {
+  animation: hashGlow 2s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ============================================
+   THEME STATES
+   ============================================ */
+.dark {
+  background: var(--color-hash-bg);
+  color: var(--color-foreground);
+}
+
+.light {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* ============================================
+   LEGACY SUPPORT CLASSES
+   ============================================ */
+.web3-card {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.web3-glow {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* ============================================
+   SDK-SPECIFIC STYLES
+   ============================================ */
+.sdk-card {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(45, 244, 161, 0.15);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: all 0.3s ease;
+}
+
+.sdk-card:hover {
+  border-color: var(--color-hash-primary);
+  box-shadow: 0 0 30px rgba(45, 244, 161, 0.15);
+}
+
+.install-command {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(45, 244, 161, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.install-command .command-text {
+  color: var(--color-hash-primary);
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(45, 244, 161, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(45, 244, 161, 0.5);
+}
+
+/* ============================================
+   SELECTION STYLING
+   ============================================ */
+::selection {
+  background: rgba(45, 244, 161, 0.3);
+  color: var(--color-foreground);
+}

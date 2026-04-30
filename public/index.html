@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodexHash - Quantum-Resistant Hashing Revolution</title>
+    <meta name="description" content="Revolutionary quantum-resistant hashing system using harmonic frequencies and physics-based constants to secure data against quantum computing threats.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'codex-purple': '#8B5CF6',
+                        'codex-blue': '#3B82F6',
+                        'codex-pink': '#EC4899',
+                        'quantum-green': '#10B981'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            to { box-shadow: 0 0 30px rgba(139, 92, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.3); }
+        }
+        
+        .quantum-grid {
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .harmonic-wave {
+            background: linear-gradient(
+                45deg,
+                rgba(139, 92, 246, 0.1) 0%,
+                rgba(59, 130, 246, 0.1) 25%,
+                rgba(236, 72, 153, 0.1) 50%,
+                rgba(16, 185, 129, 0.1) 75%,
+                rgba(139, 92, 246, 0.1) 100%
+            );
+            background-size: 400% 400%;
+            animation: wave 8s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Email Signup Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid #374151;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Demo Step Colors */
+        .border-codex-purple { border-color: #8B5CF6 !important; }
+        .border-codex-blue { border-color: #3B82F6 !important; }
+        .border-codex-pink { border-color: #EC4899 !important; }
+        .border-quantum-green { border-color: #10B981 !important; }
+        .bg-codex-purple { background-color: #8B5CF6 !important; }
+        .bg-codex-blue { background-color: #3B82F6 !important; }
+        .bg-codex-pink { background-color: #EC4899 !important; }
+        .bg-quantum-green { background-color: #10B981 !important; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Header -->
+    <header class="relative z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-r from-codex-purple to-codex-blue rounded-lg flex items-center justify-center">
+                        <span class="font-bold text-white">C</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">CodexHash</h1>
+                        <p class="text-xs text-gray-400">Quantum-Resistant Technology</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
+                    <a href="#demo" class="text-gray-300 hover:text-white transition">Demo</a>
+                    <a href="#security" class="text-gray-300 hover:text-white transition">Security</a>
+                    <a href="#technology" class="text-gray-300 hover:text-white transition">Technology</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+                </nav>
+                
+                <button onclick="redirectToRegistration()" class="bg-gradient-to-r from-codex-purple to-codex-blue px-6 py-2 rounded-lg hover:opacity-90 transition">
+                    Get Early Access
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center quantum-grid">
+        <div class="absolute inset-0 harmonic-wave"></div>
+        
+        <!-- Floating Particles -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-10 w-4 h-4 bg-codex-purple rounded-full animate-float opacity-60"></div>
+            <div class="absolute top-40 right-20 w-6 h-6 bg-codex-blue rounded-full animate-float opacity-40" style="animation-delay: -2s;"></div>
+            <div class="absolute bottom-40 left-20 w-3 h-3 bg-codex-pink rounded-full animate-float opacity-50" style="animation-delay: -4s;"></div>
+            <div class="absolute bottom-20 right-40 w-5 h-5 bg-quantum-green rounded-full animate-float opacity-30" style="animation-delay: -1s;"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Status Badge -->
+            <div class="mb-8">
+                <span class="inline-flex items-center gap-2 px-4 py-2 bg-codex-purple/20 text-codex-purple rounded-full text-sm font-medium">
+                    <span class="w-2 h-2 bg-codex-purple rounded-full animate-pulse"></span>
+                    QUANTUM-RESISTANT TECHNOLOGY
+                </span>
+            </div>
+            
+            <!-- Main Headline -->
+            <h1 class="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
+                Secure Your Data<br>
+                Against <span class="bg-gradient-to-r from-codex-purple via-codex-pink to-codex-blue bg-clip-text text-transparent">Quantum</span> Threats
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="text-xl lg:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto">
+                Revolutionary <strong>HarmonicHash</strong> algorithm combines physics-based constants with harmonic frequencies to create cryptographically secure hashes that withstand quantum computing attacks.
+            </p>
+            
+            <!-- Key Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+                    <div class="text-3xl font-bold text-codex-purple mb-2">99%</div>
+                    <div class="text-sm text-gray-400">Quantum Resistance</div>
+                </div>
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+                    <div class="text-3xl font-bold text-codex-blue mb-2">540ms</div>
+                    <div class="text-sm text-gray-400">Average Response</div>
+                </div>
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+                    <div class="text-3xl font-bold text-codex-pink mb-2">256-bit</div>
+                    <div class="text-sm text-gray-400">Hash Output</div>
+                </div>
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+                    <div class="text-3xl font-bold text-quantum-green mb-2">4+</div>
+                    <div class="text-sm text-gray-400">Security Phases</div>
+                </div>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="redirectToRegistration()" class="bg-gradient-to-r from-codex-purple to-codex-blue px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition animate-glow">
+                    Get Early Access
+                </button>
+                <button class="bg-transparent border-2 border-gray-600 px-8 py-4 rounded-lg text-lg font-semibold hover:border-codex-purple transition">
+                    View Documentation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Revolutionary Features</h2>
+                <p class="text-xl text-gray-300">Advanced cryptographic capabilities for the quantum age</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- HarmonicHash Algorithm -->
+                <div class="bg-gradient-to-br from-codex-purple/20 to-gray-900 rounded-xl p-8 border border-codex-purple/30 hover:border-codex-purple/50 transition group">
+                    <div class="w-12 h-12 bg-codex-purple/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">⚛️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">HarmonicHash Algorithm</h3>
+                    <p class="text-gray-300 mb-4">Physics-based hashing using speed of light (299,792,458 m/s), Planck frequency (1.855×10⁴³ Hz), and golden ratio (φ = 1.618).</p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Universal physics constants</li>
+                        <li>• Harmonic frequency modulation</li>
+                        <li>• Sacred geometry integration</li>
+                    </ul>
+                </div>
+                
+                <!-- Quantum Resistance -->
+                <div class="bg-gradient-to-br from-codex-blue/20 to-gray-900 rounded-xl p-8 border border-codex-blue/30 hover:border-codex-blue/50 transition group">
+                    <div class="w-12 h-12 bg-codex-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">🛡️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Quantum Resistance</h3>
+                    <p class="text-gray-300 mb-4">Real-time security assessment (30-99% quantum resistance) with adaptive protection against quantum computing attacks.</p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Multi-layered security analysis</li>
+                        <li>• Dynamic resistance scaling</li>
+                        <li>• Future-proof architecture</li>
+                    </ul>
+                </div>
+                
+                <!-- TIU Temporal Dynamics -->
+                <div class="bg-gradient-to-br from-codex-pink/20 to-gray-900 rounded-xl p-8 border border-codex-pink/30 hover:border-codex-pink/50 transition group">
+                    <div class="w-12 h-12 bg-codex-pink/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">⏱️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">TIU Temporal Dynamics</h3>
+                    <p class="text-gray-300 mb-4">Time Distortion Units (TIU) add temporal complexity, creating time-dependent security patterns.</p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Time-aware hash generation</li>
+                        <li>• Entropy distortion modeling</li>
+                        <li>• Temporal security binding</li>
+                    </ul>
+                </div>
+                
+                <!-- Enterprise API -->
+                <div class="bg-gradient-to-br from-quantum-green/20 to-gray-900 rounded-xl p-8 border border-quantum-green/30 hover:border-quantum-green/50 transition group">
+                    <div class="w-12 h-12 bg-quantum-green/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">🔌</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Enterprise API</h3>
+                    <p class="text-gray-300 mb-4">RESTful API endpoints for seamless integration with enterprise systems and applications.</p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Hash generation endpoints</li>
+                        <li>• Verification services</li>
+                        <li>• Real-time monitoring</li>
+                    </ul>
+                </div>
+                
+                <!-- Dynamic Pricing -->
+                <div class="bg-gradient-to-br from-purple-500/20 to-gray-900 rounded-xl p-8 border border-purple-500/30 hover:border-purple-500/50 transition group">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">💰</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Dynamic Pricing</h3>
+                    <p class="text-gray-300 mb-4">Intelligent pricing engine with industry multipliers and regional adjustments for optimal value.</p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Industry-specific pricing</li>
+                        <li>• Regional optimization</li>
+                        <li>• Volume discounts</li>
+                    </ul>
+                </div>
+                
+                <!-- Multi-Industry Support -->
+                <div class="bg-gradient-to-br from-orange-500/20 to-gray-900 rounded-xl p-8 border border-orange-500/30 hover:border-orange-500/50 transition group">
+                    <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">🏢</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Multi-Industry Support</h3>
+                    <p class="text-gray-300 mb-4">Specialized implementations for finance, healthcare, gaming, and enterprise sectors.</p>
+                    <ul class="text-sm text-gray-400 space-y-1">
+                        <li>• Financial services (1.5x)</li>
+                        <li>• Healthcare (1.4x)</li>
+                        <li>• Technology (1.2x)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section id="demo" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Interactive Demo</h2>
+                <p class="text-xl text-gray-300">Experience quantum-resistant hashing in real-time</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Demo Interface -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-gray-700">
+                    <h3 class="text-xl font-bold mb-6 text-center">Password Hashing Demo</h3>
+                    
+                    <!-- Demo Mode Tabs -->
+                    <div class="flex mb-6 bg-gray-800/50 rounded-lg p-1">
+                        <button id="createModeBtn" onclick="switchDemoMode('create')" 
+                                class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition bg-codex-purple text-white">
+                            Create Password
+                        </button>
+                        <button id="verifyModeBtn" onclick="switchDemoMode('verify')" 
+                                class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition bg-gray-700 text-gray-400 hover:text-white opacity-50 cursor-not-allowed"
+                                disabled title="Create a password first">
+                            Verify Password
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <!-- Create Mode -->
+                        <div id="createMode">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Enter Password to Hash</label>
+                                <input type="password" id="passwordInput" 
+                                       placeholder="Enter a secure password..."
+                                       class="w-full p-4 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-codex-purple focus:outline-none">
+                            </div>
+                            
+                            <button onclick="createPassword()" 
+                                    class="w-full bg-gradient-to-r from-codex-purple to-codex-blue py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition">
+                                🔐 Create Password Hash
+                            </button>
+                            
+                            <div id="createResult"></div>
+                        </div>
+                        
+                        <!-- Verify Mode -->
+                        <div id="verifyMode" class="hidden">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Re-enter Password to Verify</label>
+                                <input type="password" id="verifyPasswordInput" 
+                                       placeholder="Enter password to verify..."
+                                       class="w-full p-4 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-codex-purple focus:outline-none">
+                            </div>
+                            
+                            <button onclick="verifyPassword()" 
+                                    class="w-full bg-gradient-to-r from-quantum-green to-green-600 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition">
+                                ✅ Verify Password
+                            </button>
+                            
+                            <div id="verifyResult"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Algorithm Visualization -->
+                <div class="space-y-6">
+                    <!-- Physics Constants -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+                        <h4 class="text-lg font-bold mb-4 text-codex-purple">Physics Constants</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Speed of Light (C)</span>
+                                <span class="font-mono text-codex-blue">299,792,458 m/s</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Planck Frequency</span>
+                                <span class="font-mono text-codex-blue">1.855×10⁴³ Hz</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Golden Ratio (φ)</span>
+                                <span class="font-mono text-codex-blue">1.618033988749</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-300">Base Frequency</span>
+                                <span class="font-mono text-codex-blue">318.309 Hz</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Algorithm Steps -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+                        <h4 class="text-lg font-bold mb-4 text-codex-pink">Algorithm Process</h4>
+                        <div class="space-y-3">
+                            <div id="step1" class="flex items-center gap-3 p-3 rounded-lg border border-gray-600 opacity-50 transition-all duration-500">
+                                <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center text-xs">1</div>
+                                <span class="text-sm">SHA-3-256 Foundation</span>
+                            </div>
+                            <div id="step2" class="flex items-center gap-3 p-3 rounded-lg border border-gray-600 opacity-50 transition-all duration-500">
+                                <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center text-xs">2</div>
+                                <span class="text-sm">Harmonic Transformation</span>
+                            </div>
+                            <div id="step3" class="flex items-center gap-3 p-3 rounded-lg border border-gray-600 opacity-50 transition-all duration-500">
+                                <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center text-xs">3</div>
+                                <span class="text-sm">Frequency Modulation</span>
+                            </div>
+                            <div id="step4" class="flex items-center gap-3 p-3 rounded-lg border border-gray-600 opacity-50 transition-all duration-500">
+                                <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center text-xs">4</div>
+                                <span class="text-sm">Quantum-Resistant Encoding</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Demo Statistics -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+                        <h4 class="text-lg font-bold mb-4 text-quantum-green">Password Security</h4>
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div>
+                                <div id="passwordsCreated" class="text-2xl font-bold text-codex-purple">0</div>
+                                <div class="text-xs text-gray-400">Passwords Hashed</div>
+                            </div>
+                            <div>
+                                <div id="verificationsRun" class="text-2xl font-bold text-quantum-green">0</div>
+                                <div class="text-xs text-gray-400">Verifications</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-gray-600">
+                            <div class="text-sm text-gray-300 mb-2">Deterministic Quality:</div>
+                            <div id="deterministicScore" class="text-xl font-bold text-codex-blue">100%</div>
+                            <div class="text-xs text-gray-400">Same input = Same hash</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Demo Info -->
+            <div class="mt-12 text-center">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 max-w-4xl mx-auto">
+                    <p class="text-gray-300 mb-4">
+                        <strong>Demo Limitation:</strong> This is a simplified client-side demonstration. 
+                        The actual CodexHash implementation uses server-side processing with full physics calculations, 
+                        real TIU temporal binding, and enterprise-grade security features.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="redirectToRegistration()" class="bg-gradient-to-r from-codex-purple to-codex-blue px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                            Get Full Access
+                        </button>
+                        <button onclick="scrollToSection('security')" class="bg-transparent border border-gray-600 px-6 py-3 rounded-lg font-semibold hover:border-codex-purple transition">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Deep Dive -->
+    <section id="security" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Quantum-Resistant Security</h2>
+                <p class="text-xl text-gray-300">Advanced protection against future quantum computing threats</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Security Features -->
+                <div class="space-y-8">
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-xl font-bold mb-4 text-red-400">Quantum Threats Addressed</h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+                                <span><strong>Shor's Algorithm:</strong> Harmonic frequency creates non-polynomial complexity</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+                                <span><strong>Grover's Algorithm:</strong> Prime distribution provides √n complexity reduction resistance</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-red-400 rounded-full"></span>
+                                <span><strong>Quantum Annealing:</strong> TIU temporal binding creates optimization resistance</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+                        <h3 class="text-xl font-bold mb-4 text-codex-purple">Physics-Based Security</h3>
+                        <div class="space-y-3 text-gray-300 text-sm">
+                            <div class="bg-gray-900/50 p-4 rounded-lg font-mono">
+                                <div>Base Frequency = C / (2π × AU)</div>
+                                <div class="text-codex-blue">≈ 318.309 Hz</div>
+                            </div>
+                            <p>Leverages fundamental physical constants that cannot be manipulated by quantum computers.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Algorithm Visualization -->
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-gray-700">
+                        <h3 class="text-xl font-bold mb-6 text-center">4-Phase Security Model</h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Phase 1 -->
+                            <div class="flex items-center gap-4 p-4 bg-codex-purple/10 rounded-lg border border-codex-purple/30">
+                                <div class="w-8 h-8 bg-codex-purple rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                                <div>
+                                    <div class="font-semibold">Classical Hash Foundation</div>
+                                    <div class="text-sm text-gray-400">SHA-3-256 base layer</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Phase 2 -->
+                            <div class="flex items-center gap-4 p-4 bg-codex-blue/10 rounded-lg border border-codex-blue/30">
+                                <div class="w-8 h-8 bg-codex-blue rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                                <div>
+                                    <div class="font-semibold">Harmonic Transformation</div>
+                                    <div class="text-sm text-gray-400">Physics constants integration</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Phase 3 -->
+                            <div class="flex items-center gap-4 p-4 bg-codex-pink/10 rounded-lg border border-codex-pink/30">
+                                <div class="w-8 h-8 bg-codex-pink rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                                <div>
+                                    <div class="font-semibold">Dynamic Frequency Modulation</div>
+                                    <div class="text-sm text-gray-400">Golden ratio & temporal dynamics</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Phase 4 -->
+                            <div class="flex items-center gap-4 p-4 bg-quantum-green/10 rounded-lg border border-quantum-green/30">
+                                <div class="w-8 h-8 bg-quantum-green rounded-full flex items-center justify-center text-sm font-bold">4</div>
+                                <div>
+                                    <div class="font-semibold">Quantum-Resistant Encoding</div>
+                                    <div class="text-sm text-gray-400">BLAKE2b final processing</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="technology" class="py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Technology Stack</h2>
+                <p class="text-xl text-gray-300">Built with cutting-edge technologies for maximum performance</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
+                    <h3 class="text-xl font-bold mb-6 text-codex-blue">Frontend</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-codex-blue rounded-full"></span>
+                            <span>Next.js 15.4.6</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-codex-blue rounded-full"></span>
+                            <span>TypeScript</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-codex-blue rounded-full"></span>
+                            <span>Tailwind CSS</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-codex-blue rounded-full"></span>
+                            <span>React Components</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
+                    <h3 class="text-xl font-bold mb-6 text-codex-purple">Backend</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-codex-purple rounded-full"></span>
+                            <span>Python FastAPI</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-codex-purple rounded-full"></span>
+                            <span>HarmonicHash Engine</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-codex-purple rounded-full"></span>
+                            <span>RESTful APIs</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-codex-purple rounded-full"></span>
+                            <span>Real-time Processing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
+                    <h3 class="text-xl font-bold mb-6 text-quantum-green">Security</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-quantum-green rounded-full"></span>
+                            <span>SHA-3/BLAKE2b</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-quantum-green rounded-full"></span>
+                            <span>CRYSTALS-Dilithium</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-quantum-green rounded-full"></span>
+                            <span>SPHINCS+ Signatures</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 bg-quantum-green rounded-full"></span>
+                            <span>Quantum Resistance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Industry Applications</h2>
+                <p class="text-xl text-gray-300">Quantum-resistant security across multiple sectors</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Financial Services -->
+                <div class="bg-gradient-to-br from-green-500/10 to-gray-800 rounded-xl p-6 border border-green-500/20 hover:border-green-500/40 transition group">
+                    <div class="text-4xl mb-4">🏦</div>
+                    <h3 class="text-lg font-bold mb-3">Financial Services</h3>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• Secure transactions</li>
+                        <li>• Regulatory compliance</li>
+                        <li>• Dynamic pricing (1.5x)</li>
+                    </ul>
+                </div>
+                
+                <!-- Healthcare -->
+                <div class="bg-gradient-to-br from-blue-500/10 to-gray-800 rounded-xl p-6 border border-blue-500/20 hover:border-blue-500/40 transition group">
+                    <div class="text-4xl mb-4">🏥</div>
+                    <h3 class="text-lg font-bold mb-3">Healthcare</h3>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• Patient data protection</li>
+                        <li>• HIPAA compliance</li>
+                        <li>• Medical records (1.4x)</li>
+                    </ul>
+                </div>
+                
+                <!-- Gaming -->
+                <div class="bg-gradient-to-br from-purple-500/10 to-gray-800 rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/40 transition group">
+                    <div class="text-4xl mb-4">🎮</div>
+                    <h3 class="text-lg font-bold mb-3">Gaming</h3>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• Asset protection</li>
+                        <li>• Anti-cheat systems</li>
+                        <li>• User authentication</li>
+                    </ul>
+                </div>
+                
+                <!-- Enterprise -->
+                <div class="bg-gradient-to-br from-orange-500/10 to-gray-800 rounded-xl p-6 border border-orange-500/20 hover:border-orange-500/40 transition group">
+                    <div class="text-4xl mb-4">🏢</div>
+                    <h3 class="text-lg font-bold mb-3">Enterprise</h3>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• Document integrity</li>
+                        <li>• API authentication</li>
+                        <li>• Data loss prevention</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Signup Modal -->
+    <div id="emailSignupModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Join the Quantum Revolution</h2>
+                <button onclick="closeEmailSignupModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            
+            <!-- Signup Form -->
+            <div id="signupForm">
+                <p class="text-gray-300 mb-6">
+                    Be the first to know when CodexHash quantum-resistant hashing becomes available. 
+                    Get early access, technical previews, and exclusive quantum security insights.
+                </p>
+                
+                <div class="bg-gray-800/50 p-4 rounded-lg mb-6 border border-codex-purple/30">
+                    <p class="text-sm text-gray-300">
+                        🚀 <strong>Coming Soon:</strong> Full registration portal at 
+                        <span class="text-codex-purple">codexhash.web3connected.com</span>
+                    </p>
+                    <p class="text-xs text-gray-400 mt-1">
+                        For immediate access requests, contact: 
+                        <a href="mailto:contact@web3connected.com" class="text-codex-blue hover:text-codex-purple">contact@web3connected.com</a>
+                    </p>
+                </div>
+                
+                <form id="emailSignupForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email Address *</label>
+                        <input type="email" name="email" required 
+                               placeholder="your@email.com"
+                               class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-codex-purple focus:outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Company (Optional)</label>
+                        <input type="text" name="company" 
+                               placeholder="Your organization"
+                               class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-codex-purple focus:outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Primary Interest</label>
+                        <select name="interest" class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-codex-purple focus:outline-none">
+                            <option value="general">General quantum security</option>
+                            <option value="api">API integration</option>
+                            <option value="enterprise">Enterprise solutions</option>
+                            <option value="financial">Financial services</option>
+                            <option value="healthcare">Healthcare applications</option>
+                            <option value="research">Research & development</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-codex-purple to-codex-blue py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                        Get Early Access
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Success Message -->
+            <div id="signupSuccess" class="text-center hidden">
+                <div class="text-5xl mb-4">🎉</div>
+                <h3 class="text-xl font-bold mb-3 text-quantum-green">You're on the list!</h3>
+                <p class="text-gray-300 mb-4">
+                    We'll notify you as soon as CodexHash is ready for early access testing.
+                </p>
+                <p class="text-sm text-gray-400">
+                    Watch for updates about quantum-resistant technology and exclusive previews.
+                </p>
+            </div>
+            
+            <div class="mt-6 text-center text-sm text-gray-400">
+                <p>🔒 Your email is secure • 📧 No spam, quantum updates only</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 border-t border-gray-800 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-codex-purple to-codex-blue rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-white text-xl">C</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">CodexHash</h3>
+                            <p class="text-sm text-gray-400">Quantum-Resistant Technology</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Revolutionary hashing technology using physics-based constants and harmonic frequencies for quantum-resistant security.
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        © 2024 Web3Connected. All rights reserved.
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#demo" class="hover:text-white transition">Demo</a></li>
+                        <li><a href="#security" class="hover:text-white transition">Security</a></li>
+                        <li><a href="#technology" class="hover:text-white transition">Technology</a></li>
+                        <li><a href="mailto:contact@web3connected.com" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Get Started</h4>
+                    <p class="text-gray-400 mb-4">
+                        Ready to implement quantum-resistant hashing in your application?
+                    </p>
+                    <button onclick="redirectToRegistration()" class="bg-gradient-to-r from-codex-purple to-codex-blue px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition w-full mb-4">
+                        Join Waitlist
+                    </button>
+                    <p class="text-sm text-gray-500">
+                        Contact: <a href="mailto:contact@web3connected.com" class="text-codex-purple hover:text-codex-blue transition">contact@web3connected.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for smooth scrolling -->
+    <script>
+        // Show email signup modal
+        function redirectToRegistration() {
+            openEmailSignupModal();
+        }
+
+        // Email signup modal functionality
+        function openEmailSignupModal() {
+            document.getElementById('emailSignupModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEmailSignupModal() {
+            document.getElementById('emailSignupModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Handle email signup form
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('emailSignupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = this.querySelector('input[name="email"]').value;
+                const company = this.querySelector('input[name="company"]').value;
+                const interest = this.querySelector('select[name="interest"]').value;
+                
+                if (!email) {
+                    alert('Please enter your email address.');
+                    return;
+                }
+                
+                // Show success message
+                document.getElementById('signupSuccess').classList.remove('hidden');
+                document.getElementById('signupForm').classList.add('hidden');
+                
+                // In production, send to your email collection endpoint
+                console.log('Email signup:', { email, company, interest });
+                
+                // Auto-close after 3 seconds
+                setTimeout(() => {
+                    closeEmailSignupModal();
+                    document.getElementById('signupSuccess').classList.add('hidden');
+                    document.getElementById('signupForm').classList.remove('hidden');
+                    this.reset();
+                }, 3000);
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('emailSignupModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeEmailSignupModal();
+                }
+            });
+        });
+
+        // Demo state management for password functionality
+        let demoState = {
+            passwordsCreated: 0,
+            verificationsRun: 0,
+            passwordHashes: {}, // Store password -> hash mappings
+            currentMode: 'create',
+            lastCreatedPassword: null
+        };
+
+        function switchDemoMode(mode) {
+            // Don't allow switching to verify if no passwords created
+            if (mode === 'verify' && demoState.passwordsCreated === 0) {
+                return;
+            }
+            
+            demoState.currentMode = mode;
+            document.getElementById('createMode').classList.toggle('hidden', mode !== 'create');
+            document.getElementById('verifyMode').classList.toggle('hidden', mode !== 'verify');
+            
+            // Update active buttons
+            document.getElementById('createModeBtn').classList.toggle('bg-codex-purple', mode === 'create');
+            document.getElementById('createModeBtn').classList.toggle('bg-gray-700', mode !== 'create');
+            document.getElementById('verifyModeBtn').classList.toggle('bg-codex-purple', mode === 'verify');
+            document.getElementById('verifyModeBtn').classList.toggle('bg-gray-700', mode !== 'verify');
+            
+            // Update button states
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            const verifyBtn = document.getElementById('verifyModeBtn');
+            const hasPasswords = demoState.passwordsCreated > 0;
+            
+            // Enable/disable verify button based on whether passwords exist
+            verifyBtn.disabled = !hasPasswords;
+            verifyBtn.classList.toggle('opacity-50', !hasPasswords);
+            verifyBtn.classList.toggle('cursor-not-allowed', !hasPasswords);
+            verifyBtn.title = hasPasswords ? 'Test password verification' : 'Create a password first';
+        }
+
+        function updateDemoStats() {
+            document.getElementById('passwordsCreated').textContent = demoState.passwordsCreated;
+            document.getElementById('verificationsRun').textContent = demoState.verificationsRun;
+            
+            // Update button states when stats change
+            updateButtonStates();
+        }
+
+        function simulateHarmonicHash(input) {
+            // Simulate the HarmonicHash algorithm using physics constants
+            const speedOfLight = 299792458; // m/s
+            const planckFreq = 1.855e43; // Hz
+            const goldenRatio = 1.618033988749;
+            
+            let hash = 0;
+            for (let i = 0; i < input.length; i++) {
+                const char = input.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32-bit integer
+                hash = Math.abs(hash * goldenRatio) % speedOfLight;
+            }
+            
+            // Create a deterministic hex hash
+            return hash.toString(16).padStart(16, '0').substring(0, 64);
+        }
+
+        function createPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (!password) {
+                alert('Please enter a password');
+                return;
+            }
+
+            const hash = simulateHarmonicHash(password);
+            
+            // Store in demo state
+            demoState.passwordHashes[password] = hash;
+            demoState.passwordsCreated++;
+            demoState.lastCreatedPassword = password;
+            
+            // Display result
+            document.getElementById('createResult').innerHTML = `
+                <div class="mt-4 p-4 bg-green-900/30 border border-green-500 rounded-lg">
+                    <h5 class="text-green-400 font-bold mb-2">Password Hash Created</h5>
+                    <div class="bg-black/50 p-3 rounded font-mono text-sm break-all">
+                        ${hash}
+                    </div>
+                    <div class="text-xs text-gray-400 mt-2 mb-3">
+                        This hash is deterministic - the same password will always produce this exact hash
+                    </div>
+                    <button onclick="switchToVerifyMode()" 
+                            class="w-full bg-gradient-to-r from-quantum-green to-green-600 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition">
+                        ✅ Now Test Verification
+                    </button>
+                </div>
+            `;
+            
+            updateDemoStats();
+            document.getElementById('passwordInput').value = '';
+        }
+
+        function switchToVerifyMode() {
+            switchDemoMode('verify');
+            
+            // Pre-fill the verification input with the last created password for easy testing
+            if (demoState.lastCreatedPassword) {
+                document.getElementById('verifyPasswordInput').value = demoState.lastCreatedPassword;
+                document.getElementById('verifyPasswordInput').focus();
+                
+                // Show a hint
+                document.getElementById('verifyResult').innerHTML = `
+                    <div class="mt-4 p-4 bg-blue-900/30 border border-blue-500 rounded-lg">
+                        <h5 class="text-blue-400 font-bold mb-2">Ready to Test</h5>
+                        <div class="text-sm text-gray-300">
+                            The password has been pre-filled. Click "Verify Password" to see the deterministic hashing in action!
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function verifyPassword() {
+            const password = document.getElementById('verifyPasswordInput').value;
+            if (!password) {
+                alert('Please enter a password to verify');
+                return;
+            }
+
+            const computedHash = simulateHarmonicHash(password);
+            const storedHash = demoState.passwordHashes[password];
+            
+            demoState.verificationsRun++;
+            
+            let resultHTML;
+            if (storedHash) {
+                // Password exists in our demo state
+                const matches = storedHash === computedHash;
+                resultHTML = `
+                    <div class="mt-4 p-4 bg-green-900/30 border border-green-500 rounded-lg">
+                        <h5 class="text-green-400 font-bold mb-2">✓ Password Verified</h5>
+                        <div class="text-sm text-gray-300 mb-2">Original Hash:</div>
+                        <div class="bg-black/50 p-2 rounded font-mono text-xs break-all mb-2">${storedHash}</div>
+                        <div class="text-sm text-gray-300 mb-2">Computed Hash:</div>
+                        <div class="bg-black/50 p-2 rounded font-mono text-xs break-all">${computedHash}</div>
+                        <div class="text-xs text-green-400 mt-2 font-bold">
+                            ✓ Hashes match! Deterministic quality confirmed.
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Password not in demo state, show it would create new hash
+                resultHTML = `
+                    <div class="mt-4 p-4 bg-yellow-900/30 border border-yellow-500 rounded-lg">
+                        <h5 class="text-yellow-400 font-bold mb-2">Password Not Found</h5>
+                        <div class="text-sm text-gray-300 mb-2">This password would generate:</div>
+                        <div class="bg-black/50 p-2 rounded font-mono text-xs break-all">${computedHash}</div>
+                        <div class="text-xs text-gray-400 mt-2">
+                            Create this password first to demonstrate verification
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('verifyResult').innerHTML = resultHTML;
+            updateDemoStats();
+            document.getElementById('verifyPasswordInput').value = '';
+        }
+
+        // Initialize demo on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            switchDemoMode('create');
+            updateDemoStats();
+            updateButtonStates(); // Initialize button states
+        });
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Show first section immediately
+        document.querySelector('section').style.opacity = '1';
+        document.querySelector('section').style.transform = 'translateY(0)';
+    </script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+name: Deploy CodexHash to Production
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - 'src/**'
+      - 'package.json'
+      - 'ecosystem.config.js'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+env:
+  PRODUCTION_HOST: ${{ secrets.DEPLOY_HOST || '45.79.180.207' }}
+  PRODUCTION_USER: ${{ secrets.DEPLOY_USER || 'forge' }}
+  PRODUCTION_DOMAIN: codexhash.io
+  PRODUCTION_PATH: /home/forge/codexhash.io
+  FRONTEND_PORT: 3000
+  API_PORT: 8001
+
+jobs:
+  # Build and test the application
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🟢 Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: 📦 Install Node.js dependencies
+      run: npm ci
+
+    - name: 🐍 Install Python dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+
+    - name: 🔍 Run ESLint
+      run: npm run lint
+
+    - name: 🏗️ Build Next.js application
+      run: npm run build
+      env:
+        NEXT_PUBLIC_API_URL: https://codexhash.io/api
+        NEXT_PUBLIC_SITE_URL: https://codexhash.io
+
+    - name: 🧪 Test backend functionality
+      run: |
+        cd backend
+        python -c "
+        import sys
+        sys.path.append('src')
+        try:
+            from main import app
+            print('✅ Backend imports successfully')
+        except Exception as e:
+            print(f'❌ Backend import failed: {e}')
+            sys.exit(1)
+        "
+
+    - name: 🔐 Test hash generation
+      run: |
+        cd backend
+        python -c "
+        import sys
+        sys.path.append('src')
+        import requests
+        import time
+        from multiprocessing import Process
+        import uvicorn
+        from main import app
+        
+        def start_server():
+            uvicorn.run(app, host='127.0.0.1', port=8001, log_level='error')
+        
+        server = Process(target=start_server)
+        server.start()
+        time.sleep(5)
+        
+        try:
+            response = requests.get('http://127.0.0.1:8001/health', timeout=10)
+            assert response.status_code == 200
+            print('✅ Backend health check passed')
+            
+            hash_response = requests.post('http://127.0.0.1:8001/hash', 
+                                        json={'data': 'test', 'algorithm': 'harmonic'}, 
+                                        timeout=10)
+            assert hash_response.status_code == 200
+            print('✅ Hash generation test passed')
+        except Exception as e:
+            print(f'❌ Backend test failed: {e}')
+            sys.exit(1)
+        finally:
+            server.terminate()
+            server.join()
+        "
+
+  # Deploy directly to production server
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: 🔐 Setup SSH Key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.DEPLOY_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $PRODUCTION_HOST >> ~/.ssh/known_hosts
+
+    - name: 📦 Create deployment package
+      run: |
+        # Create optimized deployment package
+        mkdir -p deployment
+        
+        # Copy essential files
+        cp -r src/ deployment/
+        cp -r backend/ deployment/
+        cp -r public/ deployment/
+        cp package*.json deployment/
+        cp ecosystem.config.js deployment/
+        cp next.config.ts deployment/ 2>/dev/null || echo "No next.config.ts found"
+        cp tailwind.config.ts deployment/ 2>/dev/null || echo "No tailwind.config.ts found"
+        cp tsconfig.json deployment/ 2>/dev/null || echo "No tsconfig.json found"
+        
+        # Clean up unnecessary files
+        find deployment/ -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
+        find deployment/ -name "*.pyc" -delete 2>/dev/null || true
+        find deployment/ -name ".env*" -delete 2>/dev/null || true
+        find deployment/ -name "node_modules" -type d -exec rm -rf {} + 2>/dev/null || true
+        
+        # Create deployment archive
+        tar -czf codexhash-deployment.tar.gz -C deployment .
+
+    - name: 📤 Upload to production server
+      run: |
+        scp -o StrictHostKeyChecking=no codexhash-deployment.tar.gz $PRODUCTION_USER@$PRODUCTION_HOST:/tmp/
+
+    - name: 🚀 Deploy on production server
+      run: |
+        ssh -o StrictHostKeyChecking=no $PRODUCTION_USER@$PRODUCTION_HOST << 'EOF'
+        set -e
+        
+        echo "🚀 Starting CodexHash deployment..."
+        
+        # Navigate to site directory
+        cd /home/forge/codexhash.io
+        
+        # Backup existing installation
+        if [ -d "src" ] || [ -d "backend" ]; then
+          echo "📋 Backing up existing installation..."
+          backup_dir="backup.$(date +%Y%m%d_%H%M%S)"
+          mkdir -p "$backup_dir"
+          mv src backend public package*.json ecosystem.config.js "$backup_dir"/ 2>/dev/null || true
+        fi
+        
+        # Extract new deployment
+        echo "📦 Extracting deployment..."
+        tar -xzf /tmp/codexhash-deployment.tar.gz
+        rm /tmp/codexhash-deployment.tar.gz
+        
+        # Install Node.js dependencies
+        echo "📦 Installing Node.js dependencies..."
+        npm ci --production=false
+        
+        # Build Next.js application
+        echo "🏗️ Building Next.js application..."
+        NEXT_PUBLIC_API_URL=https://codexhash.io/api NEXT_PUBLIC_SITE_URL=https://codexhash.io NODE_ENV=production npm run build
+        
+        # Install Python dependencies
+        echo "🐍 Installing Python dependencies..."
+        cd backend
+        pip3 install -r requirements.txt --user
+        cd ..
+        
+        # Create logs directory
+        mkdir -p logs
+        
+        # Install PM2 if needed
+        if ! command -v pm2 &> /dev/null; then
+          echo "📦 Installing PM2..."
+          npm install -g pm2
+        fi
+        
+        # Stop existing services
+        echo "🛑 Stopping existing services..."
+        pm2 stop ecosystem.config.js 2>/dev/null || true
+        pm2 delete all 2>/dev/null || true
+        
+        # Start new services
+        echo "▶️ Starting CodexHash services..."
+        pm2 start ecosystem.config.js
+        pm2 save
+        
+        # Generate startup script
+        pm2 startup || true
+        
+        # Wait for services to start
+        echo "⏳ Waiting for services to start..."
+        sleep 15
+        
+        # Health check
+        echo "🔍 Performing health check..."
+        max_retries=30
+        retry_count=0
+        
+        # Check frontend
+        while [ $retry_count -lt $max_retries ]; do
+          if curl -f http://localhost:3000 > /dev/null 2>&1; then
+            echo "✅ Frontend is healthy!"
+            break
+          fi
+          echo "⏳ Waiting for frontend... ($((retry_count + 1))/$max_retries)"
+          sleep 2
+          retry_count=$((retry_count + 1))
+        done
+        
+        if [ $retry_count -eq $max_retries ]; then
+          echo "❌ Frontend health check failed"
+          pm2 logs --lines 50
+          exit 1
+        fi
+        
+        # Check backend
+        retry_count=0
+        while [ $retry_count -lt $max_retries ]; do
+          if curl -f http://localhost:8001/health > /dev/null 2>&1; then
+            echo "✅ Backend API is healthy!"
+            break
+          fi
+          echo "⏳ Waiting for backend... ($((retry_count + 1))/$max_retries)"
+          sleep 2
+          retry_count=$((retry_count + 1))
+        done
+        
+        if [ $retry_count -eq $max_retries ]; then
+          echo "❌ Backend health check failed"
+          pm2 logs --lines 50
+          exit 1
+        fi
+        
+        # Test hash generation
+        echo "🧪 Testing hash generation..."
+        curl -s -X POST http://localhost:8001/hash -H "Content-Type: application/json" -d '{"data": "production-test", "algorithm": "harmonic"}' | grep -q '"hash"'
+        echo "✅ Hash generation working"
+        
+        echo "🎉 CodexHash deployment completed successfully!"
+        EOF
+
+    - name: 🌐 Configure nginx proxy
+      run: |
+        ssh -o StrictHostKeyChecking=no $PRODUCTION_USER@$PRODUCTION_HOST << 'EOF'
+        # Create nginx configuration for CodexHash
+        sudo tee /etc/nginx/sites-available/codexhash.io > /dev/null << 'NGINX_CONF'
+        server {
+            listen 80;
+            listen [::]:80;
+            server_name codexhash.io www.codexhash.io;
+            
+            # Security headers
+            add_header X-Frame-Options "SAMEORIGIN" always;
+            add_header X-XSS-Protection "1; mode=block" always;
+            add_header X-Content-Type-Options "nosniff" always;
+            add_header Referrer-Policy "no-referrer-when-downgrade" always;
+            add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
+            
+            # Frontend (Next.js)
+            location / {
+                proxy_pass http://127.0.0.1:3000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_cache_bypass $http_upgrade;
+            }
+            
+            # API Backend
+            location /api/ {
+                proxy_pass http://127.0.0.1:8001/;
+                proxy_http_version 1.1;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                
+                # CORS headers for API
+                add_header Access-Control-Allow-Origin * always;
+                add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+                add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization" always;
+                
+                # Handle preflight requests
+                if ($request_method = 'OPTIONS') {
+                    add_header Access-Control-Allow-Origin * always;
+                    add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+                    add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization" always;
+                    add_header Content-Length 0;
+                    add_header Content-Type text/plain;
+                    return 204;
+                }
+            }
+            
+            # Specific API endpoints with optimized caching
+            location /api/health {
+                proxy_pass http://127.0.0.1:8001/health;
+                proxy_cache_bypass 1;
+                access_log off;
+            }
+            
+            location /api/hash {
+                proxy_pass http://127.0.0.1:8001/hash;
+                add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+            }
+        }
+        NGINX_CONF
+        
+        # Enable the site
+        sudo ln -sf /etc/nginx/sites-available/codexhash.io /etc/nginx/sites-enabled/
+        
+        # Test nginx configuration
+        sudo nginx -t
+        
+        # Reload nginx
+        sudo systemctl reload nginx
+        
+        echo "✅ Nginx configuration updated for CodexHash"
+        EOF
+
+    - name: 🔒 Setup SSL certificate
+      run: |
+        ssh -o StrictHostKeyChecking=no $PRODUCTION_USER@$PRODUCTION_HOST << 'EOF'
+        # Install certbot if not present
+        if ! command -v certbot &> /dev/null; then
+          sudo apt update
+          sudo apt install -y certbot python3-certbot-nginx
+        fi
+        
+        # Get SSL certificate (skip if already exists)
+        sudo certbot --nginx -d codexhash.io -d www.codexhash.io --non-interactive --agree-tos --email admin@codexhash.io || echo "Certificate already exists or failed to obtain"
+        
+        echo "🔒 SSL certificate configured"
+        EOF
+
+    - name: 🧪 Final verification
+      run: |
+        echo "🧪 Final deployment verification..."
+        
+        # Wait a moment for SSL to be ready
+        sleep 10
+        
+        # Test endpoints
+        echo "Testing https://codexhash.io"
+        curl -f -s https://codexhash.io > /dev/null || echo "Frontend test failed"
+        
+        echo "Testing https://codexhash.io/api/health"
+        curl -f -s https://codexhash.io/api/health || echo "API health test failed"
+        
+        echo "Testing hash generation"
+        curl -f -s -X POST https://codexhash.io/api/hash -H "Content-Type: application/json" -d '{"data": "final-test", "algorithm": "harmonic"}' | grep -q '"hash"' || echo "Hash generation test failed"
+        
+        echo "🎉 CodexHash.io deployment completed!"
+        echo "🌐 Production Site: https://codexhash.io"
+        echo "📡 API Health: https://codexhash.io/api/health"
+        echo "🔐 Hash API: https://codexhash.io/api/hash"
+        echo "📚 API Docs: https://codexhash.io/api/docs"

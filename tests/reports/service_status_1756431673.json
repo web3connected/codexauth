@@ -1,0 +1,48 @@
+{
+  "CodexTime": {
+    "status": "\ud83d\udfe2 HEALTHY",
+    "description": "Universal time synchronization",
+    "data": {
+      "status": "healthy",
+      "server_id": "codex-time-001",
+      "uptime": 1756431673.6362681,
+      "last_sync": 1756431588.105344,
+      "system": {
+        "cpu_usage": 7.3,
+        "memory_usage": 85.8,
+        "memory_available": 1174147072,
+        "load_avg": [
+          0.75146484375,
+          0.6259765625,
+          0.525390625
+        ]
+      }
+    }
+  },
+  "CodexAuth MCP": {
+    "status": "\ud83d\udfe2 HEALTHY",
+    "description": "MCP gateway for temporal hashing",
+    "data": {
+      "status": "healthy",
+      "service": "CodexAuth",
+      "version": "1.0.0",
+      "policyVersion": "codexauth/1.2.0",
+      "buildHash": "sha256:codex-hash-mcp-v1.0.0",
+      "timestamp": "2025-08-29T01:41:13.639Z"
+    }
+  },
+  "CodexAuth Bridge": {
+    "status": "\ud83d\udfe2 HEALTHY",
+    "description": "Python-TypeScript bridge",
+    "data": {
+      "status": "healthy",
+      "service": "CodexAuth Python Bridge",
+      "version": "1.0.0",
+      "python_implementation": true,
+      "time_server_available": false,
+      "timestamp": "2025-08-29T01:41:13.641570Z"
+    }
+  },
+  "CodexAuth Core": {
+    "status": "\ud83d\udfe2 FUNCTIONAL",
+    "test_hash": 

@@ -1,0 +1,181 @@
+/**
+ * Web3 Codex Unified Design System
+ * 
+ * This is the master design system that will be shared across all Web3 Codex sites
+ * except the admin site (which uses AdminLTE with Tailwind).
+ * 
+ * Architecture:
+ * - CSS Custom Properties for theme variables
+ * - Tailwind CSS for utility classes
+ * - Component-based design system
+ * - Theme switching capabilities
+ * - Responsive design patterns
+ */
+
+:root {
+  /* === BRAND COLORS === */
+  --color-primary-theme: #1c2430;      /* Web3 */
+  --color-secondary-theme: #1146a3;    /* Secondary blue */
+  --color-trinary: #d9e631;            /* Accent yellow-green */
+  --color-background: #0a0f1c;         /* Deep background */
+  --color-foreground: #f7fafc;         /* Light text */
+
+  /* === BRAND IDENTITY COLORS === */
+  --color-brand-codex: rgb(175, 71, 11);  /* Connected orange */
+  --color-brand-identity: #4f7096;        /* Identity blue */
+  --color-brand-secure: #405168;          /* Secure blue-gray */
+  --color-brand-voice: #78716c;           /* Voice warm gray */
+  --color-brand-time: #4c5b7c;            /* Time blue-gray */
+  --color-brand-harmonics: #8b5a87;       /* Harmonics purple */
+  --color-brand-resonance: #6b8e47;       /* Resonance green */
+  --color-brand-mind: #b8860b;            /* Mind golden */
+  --color-brand-universe: #022446;         /* Universe dark blue */
+  --color-brand-factor: #fbbf24;       /* Ecosystem yellow */
+
+  /* === APPLICATION LOGO BRAND MAPPINGS === */
+  --logo-web3-codex: var(--color-brand-codex);           /* Main Web3 Codex - Connected orange */
+  --logo-codex-identity: var(--color-brand-identity);    /* Codex Identity - Identity blue */
+  --logo-codex-secure: var(--color-brand-secure);        /* Codex Secure - Secure blue-gray */
+  --logo-codex-voice: var(--color-brand-voice);          /* Codex Voice - Voice warm gray */
+  --logo-codex-time: var(--color-brand-time);            /* Codex Time - Time blue-gray */
+  --logo-codex-harmonics: var(--color-brand-harmonics);  /* Codex Harmonics - Harmonics purple */
+  --logo-codex-resonance: var(--color-brand-resonance);  /* Codex Resonance - Resonance green */
+  --logo-codex-mind: var(--color-brand-mind);            /* Codex Mind - Mind golden */
+  --logo-universe-factor: var(--color-brand-universe);   /* Universe Factor - Universe dark blue */
+  --logo-ecosystem-factor: var(--color-brand-factor);    /* Ecosystem Factor - Ecosystem yellow */
+  
+  /* Logo context variants */
+  --logo-primary-accent: var(--color-secondary-theme);   /* Primary logo accent - Secondary blue */
+  --logo-secondary-accent: var(--color-trinary);         /* Secondary logo accent - Accent yellow-green */
+  --logo-on-dark: var(--color-foreground);               /* Logo on dark backgrounds - Light text */
+  --logo-on-light: var(--color-primary-theme);          /* Logo on light backgrounds - Web3 theme */
+
+  /* === GRADIENTS === */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-theme), var(--color-secondary-theme));
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-codex), var(--color-trinary));
+  --gradient-glass: linear-gradient(135deg, rgba(28, 36, 48, 0.95), rgba(17, 70, 163, 0.95));
+
+  /* === SEMANTIC COLORS === */
+  --color-success: #059669;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+  --color-info: #2563eb;
+
+  /* === SPACING SCALE === */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+
+  /* === TYPOGRAPHY === */
+  --font-family-brand: 'Orbitron', 'Courier New', monospace;
+  --font-family-heading: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-family-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.875rem;    /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+  --font-size-5xl: 3rem;       /* 48px */
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* === BORDER RADIUS === */
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.375rem;   /* 6px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-2xl: 1rem;      /* 16px */
+  --radius-full: 9999px;
+
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(64, 81, 100, 0.3);
+  --shadow-glow-brand: 0 0 20px rgba(175, 71, 11, 0.3);
+
+  /* === TRANSITIONS === */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* === Z-INDEX SCALE === */
+  --z-behind: -1;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-overlay: 20;
+  --z-modal: 30;
+  --z-popover: 40;
+  --z-tooltip: 50;
+  --z-toast: 60;
+
+  /* === GLASS MORPHISM === */
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-backdrop: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+
+  /* === LAYOUT === */
+  --container-max-width: 1200px;
+  --sidebar-width: 280px;
+  --header-height: 80px;
+}
+
+/* === DARK THEME VARIANTS === */
+[data-theme="dark"] {
+  --color-background: #0a0f1c;
+  --color-foreground: #f7fafc;
+  --color-surface: #1c2430;
+  --color-surface-light: #2a3441;
+}
+
+/* === LIGHT THEME VARIANTS === */
+[data-theme="light"] {
+  --color-background: #ffffff;
+  --color-foreground: #1a202c;
+  --color-surface: #f7fafc;
+  --color-surface-light: #edf2f7;
+}
+
+/* === BASE STYLES === */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

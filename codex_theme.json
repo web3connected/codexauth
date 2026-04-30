@@ -1,0 +1,48 @@
+{
+  "codexauth": {
+    "name": "CodexAuth",
+    "tagline": "Quantum-Resistant Hashing System",
+    "description": "Secure, quantum-resistant hashing for Web3 applications",
+    "colors": {
+      "primary": "#2DF4A1",
+      "secondary": "#00E4FF",
+      "accent": "#FF6B35",
+      "background": "#0F172A",
+      "surface": "#1E293B",
+      "foreground": "#F8FAFC"
+    },
+    "fonts": {
+      "brand": "Orbitron",
+      "heading": "Poppins",
+      "body": "Inter",
+      "mono": "JetBrains Mono"
+    },
+    "gradients": {
+      "primary": "linear-gradient(135deg, #2DF4A1, #00E4FF)",
+      "accent": "linear-gradient(135deg, #FF6B35, #2DF4A1)",
+      "brand": "linear-gradient(135deg, #2DF4A1, #00E4FF, #FF6B35)"
+    },
+    "social": {
+      "github": "https://github.com/web3connected/codexauth",
+      "twitter": "https://twitter.com/web3codex"
+    },
+    "metadata": {
+      "port": 3001,
+      "version": "0.1.0"
+    }
+  },
+  "web3_codex": {
+    "name": "Web3 Codex",
+    "colors": {
+      "primary": "#d9e631",
+      "secondary": "#1146a3",
+      "background": "#0a0f1c",
+      "brand": "rgb(175, 71, 11)"
+    },
+    "fonts": {
+      "brand": "Orbitron",
+      "heading": "Poppins",
+      "body": "Inter"
+    }
+  }
+}
