@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# CodexAuth.io Forge Deployment Script
-# This script will be used in Laravel Forge deployment
+# CodexAuth.io — Forge Auto-Deploy Script
+# Triggered by Forge on every push to main
+# Runs as: forge user on CodexWeb3 (172.104.27.176)
 
 set -e
 
@@ -9,64 +10,39 @@ echo "🚀 Starting CodexAuth.io deployment..."
 
 cd $FORGE_SITE_PATH
 
-# Pull latest changes
-git pull origin $FORGE_SITE_BRANCH
-
 # Install Node.js dependencies
-echo "📦 Installing Node.js dependencies..."
+echo "📦 Installing dependencies..."
 npm ci --production=false
 
-# Build Next.js application
-echo "🔨 Building Next.js application..."
+# Build Next.js
+echo "🔨 Building Next.js..."
 npm run build
 
-# Install Python dependencies for backend
-echo "🐍 Installing Python dependencies..."
-cd backend
-pip3 install -r requirements.txt --user
-cd ..
-
-# Create logs directory if it doesn't exist
+# Create logs directory
 mkdir -p logs
 
-# Install PM2 if not already installed
+# Ensure PM2 is available
 if ! command -v pm2 &> /dev/null; then
     echo "📦 Installing PM2..."
     npm install -g pm2
 fi
 
-# Stop existing processes
-echo "🛑 Stopping existing processes..."
-pm2 stop ecosystem.config.js || true
+# Restart or start PM2 prod process
+echo "♻️ Restarting PM2 process..."
+pm2 describe codexauth-prod > /dev/null 2>&1 \
+    && pm2 restart codexauth-prod \
+    || pm2 start ecosystem.config.js --only codexauth-prod
 
-# Start processes with PM2
-echo "▶️ Starting CodexAuth services..."
-pm2 start ecosystem.config.js
-
-# Save PM2 configuration
 pm2 save
 
-# Generate PM2 startup script if needed
-pm2 startup || true
-
-echo "✅ CodexAuth.io deployment completed successfully!"
+echo "✅ CodexAuth.io deployed!"
 
 # Health check
-sleep 5
-echo "🔍 Performing health checks..."
-
-# Check frontend
-if curl -f -s http://localhost:3000 > /dev/null; then
-    echo "✅ Frontend is responding"
+sleep 3
+if curl -fs http://localhost:3003 > /dev/null; then
+    echo "✅ Site is responding on port 3003"
 else
-    echo "❌ Frontend health check failed"
-fi
-
-# Check backend
-if curl -f -s http://localhost:8001/health > /dev/null; then
-    echo "✅ Backend is responding"
-else
-    echo "❌ Backend health check failed"
+    echo "⚠️  Health check: no response on :3003 yet (may still be starting)"
 fi
 
 echo "🎉 Deployment complete! CodexAuth.io is live!"
