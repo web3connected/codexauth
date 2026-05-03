@@ -47,7 +47,7 @@ export const TabbedCodeViewer: React.FC<TabbedCodeViewerProps> = ({
             onClick={() => setSelected(ex.id)}
             className={`px-4 py-2 rounded-lg text-sm transition-colors ${
               selected === ex.id
-                ? 'bg-auth-primary text-white'
+                ? 'bg-hash-primary text-white'
                 : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
             }`}
           >
@@ -67,7 +67,7 @@ export const TabbedCodeViewer: React.FC<TabbedCodeViewerProps> = ({
             >
               {copiedId === active.id ? (
                 <>
-                  <svg className="w-4 h-4 text-auth-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-4 h-4 text-hash-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                   Copied!
@@ -84,7 +84,7 @@ export const TabbedCodeViewer: React.FC<TabbedCodeViewerProps> = ({
           </div>
           <div className="p-4">
             <pre className="bg-black rounded p-4 overflow-x-auto">
-              <code className="text-sm text-auth-primary">{active.code}</code>
+              <code className="text-sm text-hash-primary">{active.code}</code>
             </pre>
           </div>
         </div>

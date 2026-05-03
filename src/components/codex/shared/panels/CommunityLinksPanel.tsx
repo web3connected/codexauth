@@ -77,8 +77,8 @@ export const CommunityLinksPanel: React.FC<CommunityLinksPanelProps> = ({
 
           {/* CTA Banner */}
           {(ctaTitle || ctaButtons.length > 0) && (
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-auth-primary/10 via-auth-accent/10 to-auth-secondary/10 p-8 md:p-12">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-auth-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-hash-primary/10 via-hash-accent/10 to-hash-secondary/10 p-8 md:p-12">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-hash-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="text-center md:text-left">
                   {ctaTitle && (
@@ -96,7 +96,7 @@ export const CommunityLinksPanel: React.FC<CommunityLinksPanelProps> = ({
                         href={btn.href}
                         className={
                           btn.primary
-                            ? 'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-auth-primary text-white font-semibold transition-all hover:bg-auth-primary/90 hover:scale-105'
+                            ? 'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-hash-primary text-white font-semibold transition-all hover:bg-hash-primary/90 hover:scale-105'
                             : 'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white font-medium transition-all hover:bg-white/5'
                         }
                       >
@@ -123,18 +123,18 @@ function CommunityCard({ link }: { link: CommunityLink }) {
     <Link
       href={link.href}
       {...externalProps}
-      className="group flex flex-col items-center text-center p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-auth-primary/30 hover:scale-105"
+      className="group flex flex-col items-center text-center p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-hash-primary/30 hover:scale-105"
     >
-      <div className="mb-4 p-3 rounded-full bg-white/5 border border-white/10 text-slate-400 group-hover:text-auth-primary group-hover:border-auth-primary/20 transition-colors">
+      <div className="mb-4 p-3 rounded-full bg-white/5 border border-white/10 text-slate-400 group-hover:text-hash-primary group-hover:border-hash-primary/20 transition-colors">
         {link.icon}
       </div>
-      <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-auth-primary transition-colors">
+      <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-hash-primary transition-colors">
         {link.title}
       </h3>
       <p className="text-sm text-slate-500">{link.description}</p>
       {link.external && (
         <svg
-          className="w-4 h-4 mt-3 text-slate-600 group-hover:text-auth-primary transition-colors"
+          className="w-4 h-4 mt-3 text-slate-600 group-hover:text-hash-primary transition-colors"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

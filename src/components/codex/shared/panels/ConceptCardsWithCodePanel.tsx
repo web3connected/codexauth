@@ -53,7 +53,7 @@ export const ConceptCardsWithCodePanel: React.FC<ConceptCardsWithCodePanelProps>
 
       {/* Code block */}
       <div className="bg-black rounded-lg p-6">
-        <pre className="text-auth-primary text-sm overflow-x-auto whitespace-pre-wrap">{codeBlockContent}</pre>
+        <pre className="text-hash-primary text-sm overflow-x-auto whitespace-pre-wrap">{codeBlockContent}</pre>
       </div>
 
       {/* Bullet list */}

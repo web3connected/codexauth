@@ -51,7 +51,7 @@ export const ApiEndpointTablePanel: React.FC<ApiEndpointTablePanelProps> = ({
                 <span className={`px-3 py-1 rounded text-sm font-bold text-white ${methodColors[ep.method] ?? 'bg-slate-600'}`}>
                   {ep.method}
                 </span>
-                <code className="text-auth-secondary font-mono text-lg">{ep.endpoint}</code>
+                <code className="text-hash-secondary font-mono text-lg">{ep.endpoint}</code>
               </div>
               <p className="text-slate-300">{ep.description}</p>
             </div>
@@ -72,7 +72,7 @@ export const ApiEndpointTablePanel: React.FC<ApiEndpointTablePanelProps> = ({
                   <tbody>
                     {ep.parameters.map((p, pi) => (
                       <tr key={pi} className="border-b border-slate-700">
-                        <td className="py-2 pr-4 font-mono text-auth-secondary">{p.name}</td>
+                        <td className="py-2 pr-4 font-mono text-hash-secondary">{p.name}</td>
                         <td className="py-2 pr-4 text-purple-400">{p.type}</td>
                         <td className="py-2 pr-4">
                           <span className={`px-2 py-0.5 rounded text-xs text-white ${p.required ? 'bg-red-600' : 'bg-slate-600'}`}>

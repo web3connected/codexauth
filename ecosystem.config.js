@@ -4,7 +4,7 @@ module.exports = {
     {
       name: 'codexauth-dev',
       script: 'node_modules/.bin/next',
-      args: 'dev --turbopack -p 3003',
+      args: 'dev --turbopack -p 3004',
       cwd: __dirname,
       watch: false,
       autorestart: true,
@@ -25,7 +25,7 @@ module.exports = {
     {
       name: 'codexauth-prod',
       script: 'node_modules/.bin/next',
-      args: 'start -p 3003',
+      args: 'start -p 3004',
       cwd: __dirname,
       instances: 1,
       exec_mode: 'fork',
@@ -36,7 +36,7 @@ module.exports = {
       max_memory_restart: '512M',
       env: {
         NODE_ENV: 'production',
-        PORT: 3003,
+        PORT: 3004,
       },
       error_file: './logs/pm2-prod-error.log',
       out_file: './logs/pm2-prod-out.log',

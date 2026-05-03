@@ -18,7 +18,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({
         {/* Logo Section */}
         {showLogo && (
           <div className="animate-pulse">
-            <ApplicationLogo logo="CodexAuth" showIcon={true} />
+            <ApplicationLogo logo="CodexHash" showIcon={true} />
           </div>
         )}
 

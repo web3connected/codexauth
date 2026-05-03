@@ -18,7 +18,7 @@ interface HeaderActionsProps {
  */
 const HeaderActions: React.FC<HeaderActionsProps> = ({
   githubUrl = 'https://github.com/web3codex',
-  getStartedUrl = 'https://web3connected.com/getting-started/codexauth',
+  getStartedUrl = 'https://web3connected.com/getting-started/codexhash',
   getStartedLabel = 'Get Started',
 }) => {
   return (

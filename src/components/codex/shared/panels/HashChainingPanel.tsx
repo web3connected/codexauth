@@ -44,7 +44,7 @@ export const HashChainingPanel: React.FC<HashChainingPanelProps> = ({
       {/* Chain formula */}
       <div className="bg-slate-800/60 rounded-lg border border-slate-600 p-6">
         <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Core Formula</h3>
-        <pre className="text-auth-primary font-mono text-base overflow-x-auto">{chainFormula}</pre>
+        <pre className="text-hash-primary font-mono text-base overflow-x-auto">{chainFormula}</pre>
       </div>
 
       {/* Visual chain */}
@@ -55,18 +55,18 @@ export const HashChainingPanel: React.FC<HashChainingPanelProps> = ({
             <div key={step.step} className="flex gap-4">
               {/* Connector line */}
               <div className="flex flex-col items-center">
-                <div className="w-9 h-9 rounded-full bg-auth-primary text-white flex items-center justify-center font-bold text-sm shrink-0">
+                <div className="w-9 h-9 rounded-full bg-hash-primary text-white flex items-center justify-center font-bold text-sm shrink-0">
                   {step.step}
                 </div>
                 {i < chainSteps.length - 1 && (
-                  <div className="w-0.5 h-full bg-auth-primary/30 my-1 min-h-[2rem]" />
+                  <div className="w-0.5 h-full bg-hash-primary/30 my-1 min-h-[2rem]" />
                 )}
               </div>
               {/* Content */}
               <div className="pb-6">
                 <h4 className="font-semibold text-white mb-1">{step.title}</h4>
                 {step.formula && (
-                  <div className="bg-black rounded px-3 py-2 font-mono text-auth-secondary text-sm mb-2 overflow-x-auto">
+                  <div className="bg-black rounded px-3 py-2 font-mono text-hash-secondary text-sm mb-2 overflow-x-auto">
                     {step.formula}
                   </div>
                 )}
@@ -100,7 +100,7 @@ export const HashChainingPanel: React.FC<HashChainingPanelProps> = ({
       )}
 
       {/* No-blockchain callout */}
-      <div className="bg-gradient-to-r from-auth-primary/10 to-auth-secondary/10 rounded-lg border border-auth-primary/20 p-5">
+      <div className="bg-gradient-to-r from-hash-primary/10 to-hash-secondary/10 rounded-lg border border-hash-primary/20 p-5">
         <p className="text-slate-300 text-sm">
           <span className="text-white font-semibold">No blockchain required.</span>{' '}
           Hash chaining provides tamper-evident continuity through pure cryptographic binding — no consensus, no tokens, no wallets.

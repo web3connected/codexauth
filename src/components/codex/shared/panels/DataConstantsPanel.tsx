@@ -20,7 +20,7 @@ export interface DataConstantsPanelProps {
   constants: DataConstant[];
   /** Optional highlighted callout box below the grid */
   callout?: DataConstantCallout;
-  /** Tailwind accent color for the value text e.g. "text-auth-secondary" */
+  /** Tailwind accent color for the value text e.g. "text-hash-secondary" */
   valueColor?: string;
 }
 
@@ -29,7 +29,7 @@ export const DataConstantsPanel: React.FC<DataConstantsPanelProps> = ({
   subtitle,
   constants,
   callout,
-  valueColor = 'text-auth-secondary',
+  valueColor = 'text-hash-secondary',
 }) => {
   return (
     <div className="bg-slate-900/50 rounded-lg border border-slate-700 p-8 space-y-8">
@@ -55,7 +55,7 @@ export const DataConstantsPanel: React.FC<DataConstantsPanelProps> = ({
           <h3 className="text-xl font-semibold text-white mb-3">{callout.title}</h3>
           <p className="text-slate-300 mb-4">{callout.description}</p>
           {callout.formula && (
-            <div className="bg-black/50 rounded p-4 font-mono text-auth-primary text-sm">
+            <div className="bg-black/50 rounded p-4 font-mono text-hash-primary text-sm">
               {callout.formula}
             </div>
           )}

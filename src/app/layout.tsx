@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { Inter, Poppins, JetBrains_Mono, Orbitron } from "next/font/google";
 import { Providers } from "@/providers/Providers";
 import CodexAuthDataLayer from "./CodexAuthDataLayer";
+import { CodexSecureInit } from "@/lib/codexsecure";
+import ZoneDevBar from "@/components/layout/ZoneDevBar";
 import "./globals.css";
+
+// ── App entry point — boot CodexSecure (zone structure + route loading) ───────
+CodexSecureInit({ debug: process.env.NODE_ENV === 'development' });
 
 // Font configurations
 const inter = Inter({
@@ -70,6 +75,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col font-body">
         <Providers>
+          <ZoneDevBar />
           <CodexAuthDataLayer>
             {children}
           </CodexAuthDataLayer>

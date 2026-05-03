@@ -15,6 +15,12 @@ import {
 
 interface GlobalHeaderProps {
   className?: string;
+  /**
+   * Controls the inner container width for BOTH the topbar and the mid/bottom bar.
+   * - 'full'  → spans the full viewport width (default)
+   * - 'boxed' → constrained to max-w-7xl and centred with auto margins
+   */
+  layout?: 'full' | 'boxed';
   // TopBar widgets (4 slots in 2 columns)
   topbarWidgets?: Array<{
     slot: 'widget_01' | 'widget_02' | 'widget_03' | 'widget_04';
@@ -46,13 +52,14 @@ interface GlobalHeaderProps {
  * ]
  */
 const TopBar: React.FC<{
+  layout?: 'full' | 'boxed';
   widgets?: Array<{
     slot: 'widget_01' | 'widget_02' | 'widget_03' | 'widget_04';
     name: string;
     component: React.ComponentType<any>;
     props?: any;
   }>;
-}> = ({ widgets = [] }) => {
+}> = ({ layout = 'full', widgets = [] }) => {
   // Organize widgets by slot
   const widgetsBySlot = {
     widget_01: widgets.find(w => w.slot === 'widget_01'),
@@ -61,9 +68,13 @@ const TopBar: React.FC<{
     widget_04: widgets.find(w => w.slot === 'widget_04'),
   };
 
+  const inner = layout === 'boxed'
+    ? 'max-w-7xl mx-auto px-6 h-full grid grid-cols-2 items-center'
+    : 'w-full px-6 h-full grid grid-cols-2 items-center';
+
   return (
     <div className="h-10 border-b border-white/10 bg-black/20">
-      <div className="w-full px-6 h-full grid grid-cols-2 items-center">
+      <div className={inner}>
         {/* Left column: slots 1 & 2 */}
         <div className="flex items-center gap-4 justify-start">
           {widgetsBySlot.widget_01 && (
@@ -160,21 +171,29 @@ const ServicesDropdown: React.FC<{ currentService?: string }> = ({ currentServic
  * Provides structure for header with widget slots
  * - TopBar: 40px with 4 widget slots (2 left, 2 right)
  * - Bottom: 100px with 2 widget slots (logo left, nav right)
+ *
+ * layout="full"  → inner content spans full viewport width (default)
+ * layout="boxed" → inner content constrained to max-w-7xl, centred
  */
 const GlobalHeader: React.FC<GlobalHeaderProps> = ({
   className = "",
+  layout = 'full',
   topbarWidgets = [],
   logoWidget,
   navWidget,
 }) => {
+  const inner = layout === 'boxed'
+    ? 'max-w-7xl mx-auto px-6 h-full grid grid-cols-2 items-center'
+    : 'w-full px-6 h-full grid grid-cols-2 items-center';
+
   return (
     <header className={`glass sticky top-0 z-40 ${className}`}>
       {/* Top Bar - 40px height with 4 widget slots */}
-      <TopBar widgets={topbarWidgets} />
+      <TopBar layout={layout} widgets={topbarWidgets} />
 
-      {/* Bottom Section - 100px height with 2 widget slots */}
+      {/* Mid/Bottom Bar - 100px height with 2 widget slots */}
       <div className="h-25 border-b border-white/10">
-        <div className="w-full px-6 h-full grid grid-cols-2 items-center">
+        <div className={inner}>
           {/* Left column: Logo widget */}
           <div className="flex items-center gap-4">
             {logoWidget && <logoWidget.component {...(logoWidget.props || {})} />}

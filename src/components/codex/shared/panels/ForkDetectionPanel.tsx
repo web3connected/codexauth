@@ -85,7 +85,7 @@ Both are cryptographically valid — but represent different realities.`}</pre>
                 <p className="text-slate-300 text-sm mt-1">{method.description}</p>
               </div>
               <div className="p-4">
-                <pre className="bg-black rounded p-3 text-auth-primary font-mono text-xs overflow-x-auto">{method.code}</pre>
+                <pre className="bg-black rounded p-3 text-hash-primary font-mono text-xs overflow-x-auto">{method.code}</pre>
               </div>
             </div>
           ))}
@@ -111,7 +111,7 @@ Both are cryptographically valid — but represent different realities.`}</pre>
       {/* Key point */}
       <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-lg border border-blue-500/20 p-5">
         <p className="text-slate-300 text-sm">
-          <span className="text-white font-semibold">CodexAuth detects forks — it doesn't resolve them.</span>{' '}
+          <span className="text-white font-semibold">CodexHash detects forks — it doesn't resolve them.</span>{' '}
           Detection is deterministic and objective: two valid chains with the same origin hash means a fork exists.
           Resolution requires a policy decision about which version of history to accept.
         </p>

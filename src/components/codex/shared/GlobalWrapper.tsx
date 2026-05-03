@@ -10,9 +10,9 @@ import React, { ReactNode } from 'react';
  * Each service passes its own header and footer as props.
  */
 export interface GlobalWrapperProps {
-  /** Header component to render (e.g., CodexAuthHeader) */
+  /** Header component to render (e.g., CodexHashHeader) */
   header?: ReactNode;
-  /** Footer component to render (e.g., CodexAuthFooter) */
+  /** Footer component to render (e.g., CodexHashFooter) */
   footer?: ReactNode;
   /** Page content */
   children: ReactNode;
@@ -35,16 +35,16 @@ export interface GlobalWrapperProps {
  * 
  * Usage:
  * ```tsx
- * // In CodexAuthDataLayer.tsx
+ * // In CodexHashDataLayer.tsx
  * import { GlobalWrapper } from '@/components/codex/GlobalWrapper';
- * import CodexAuthHeader from '@/components/codex/codexauth/CodexAuthHeader';
- * import CodexAuthFooter from '@/components/codex/codexauth/CodexAuthFooter';
+ * import CodexHashHeader from '@/components/codex/codexhash/CodexHashHeader';
+ * import CodexHashFooter from '@/components/codex/codexhash/CodexHashFooter';
  * 
- * export function CodexAuthDataLayer({ children }) {
+ * export function CodexHashDataLayer({ children }) {
  *   return (
  *     <GlobalWrapper
- *       header={<CodexAuthHeader />}
- *       footer={<CodexAuthFooter />}
+ *       header={<CodexHashHeader />}
+ *       footer={<CodexHashFooter />}
  *     >
  *       {children}
  *     </GlobalWrapper>

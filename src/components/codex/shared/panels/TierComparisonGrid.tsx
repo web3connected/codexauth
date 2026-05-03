@@ -67,14 +67,14 @@ function TierCardItem({ tier }: { tier: TierCard }) {
     <div
       className={`relative flex flex-col rounded-2xl border p-8 transition-all ${
         tier.highlight
-          ? 'border-auth-primary/50 bg-auth-primary/10 shadow-lg shadow-auth-primary/10'
+          ? 'border-hash-primary/50 bg-hash-primary/10 shadow-lg shadow-hash-primary/10'
           : 'border-white/10 bg-white/5'
       }`}
     >
       {/* Popular badge */}
       {tier.highlight && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span className="px-4 py-1 rounded-full text-xs font-semibold bg-auth-primary text-white shadow-md">
+          <span className="px-4 py-1 rounded-full text-xs font-semibold bg-hash-primary text-white shadow-md">
             {tier.badge}
           </span>
         </div>
@@ -88,14 +88,14 @@ function TierCardItem({ tier }: { tier: TierCard }) {
             <span className="text-xs font-medium text-slate-500 mt-0.5 block">{tier.badge}</span>
           )}
         </div>
-        <div className="p-2 rounded-lg bg-auth-primary/10 border border-auth-primary/20 text-auth-primary">
+        <div className="p-2 rounded-lg bg-hash-primary/10 border border-hash-primary/20 text-hash-primary">
           {tier.icon}
         </div>
       </div>
 
       {/* Stat box */}
       <div className="mb-6 p-4 rounded-xl bg-black/20 border border-white/5">
-        <div className="text-4xl font-bold text-auth-primary">{tier.stat}</div>
+        <div className="text-4xl font-bold text-hash-primary">{tier.stat}</div>
         <div className="text-xs text-slate-500 mt-1">{tier.statLabel}</div>
       </div>
 
@@ -107,7 +107,7 @@ function TierCardItem({ tier }: { tier: TierCard }) {
         {tier.useCases.map((useCase, i) => (
           <li key={i} className="flex items-center gap-2 text-sm text-slate-300">
             <svg
-              className="w-4 h-4 text-auth-primary shrink-0"
+              className="w-4 h-4 text-hash-primary shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -125,7 +125,7 @@ function TierCardItem({ tier }: { tier: TierCard }) {
         href={tier.ctaHref}
         className={`w-full text-center py-3 px-6 rounded-xl font-semibold text-sm transition-all ${
           tier.highlight
-            ? 'bg-auth-primary text-white hover:bg-auth-primary/90 hover:shadow-lg hover:shadow-auth-primary/25'
+            ? 'bg-hash-primary text-white hover:bg-hash-primary/90 hover:shadow-lg hover:shadow-hash-primary/25'
             : 'bg-white/10 text-white hover:bg-white/20 border border-white/10'
         }`}
       >

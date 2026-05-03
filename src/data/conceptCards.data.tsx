@@ -4,15 +4,15 @@ export const codexHashConceptCards: [PanelCard, PanelCard, PanelCard] = [
   {
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
       </svg>
     ),
-    title: 'Zone-Aware Auth',
-    tagline: 'Z1–Z12 enforcement · route protection',
+    title: 'Unified Sign-In',
+    tagline: 'Web2 + Web3 · one session model',
     description:
-      'Every session is issued a zone claim (Z1–Z12) from CodexSecure. Routes and APIs enforce zone boundaries automatically — users only access what their trust level permits.',
-    stat: '12',
-    statLabel: 'security zones enforced per session',
+      'Email/password and wallet-based sign-in are handled by the same SDK, issuing the same session token format. No separate flows, no separate middleware — one auth surface for all users.',
+    stat: '2-in-1',
+    statLabel: 'auth modes in a single SDK install',
   },
   {
     icon: (
@@ -20,24 +20,24 @@ export const codexHashConceptCards: [PanelCard, PanelCard, PanelCard] = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    title: 'Time-Locked Tokens',
-    tagline: 'TIU temporal anchor · replay-proof JWTs',
+    title: 'Time-Locked JWTs',
+    tagline: 'TIU window binding · replay-proof',
     description:
-      'Every JWT embeds a TIU (Time Interval Unit) from CodexTime. Tokens are bound to a precise time window — replayed tokens from expired windows are rejected mathematically.',
+      'Every JWT issued by CodexAuth is bound to a Time Interval Unit window. Tokens outside their window are rejected instantly — no database lookup, no session store query.',
     stat: 'Zero',
-    statLabel: 'valid replays from expired TIU windows',
+    statLabel: 'valid replays from expired token windows',
   },
   {
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
       </svg>
     ),
-    title: 'Hash-Verified Identity',
-    tagline: 'CodexHash credentials · tamper-evident',
+    title: 'Session Lifecycle',
+    tagline: 'refresh · revoke · multi-device',
     description:
-      'Credentials are verified through CodexHarmonicHash — not plain bcrypt. Any credential tampering breaks the hash chain instantly, with no blockchain or consensus required.',
-    stat: '1 bit',
-    statLabel: 'of change detected across credential chain',
+      'Token refresh, silent re-authentication, revocation, and multi-device session tracking are built into the SDK. No custom middleware or external session store needed.',
+    stat: '<50ms',
+    statLabel: 'token refresh and re-auth round-trip',
   },
 ];

@@ -42,6 +42,12 @@ export default function GettingStartedPage() {
         eyebrow={gettingStartedHero.eyebrow}
         title={gettingStartedHero.title}
         titleHighlight={gettingStartedHero.titleHighlight}
+        titleHighlightStyle={{
+          background: 'linear-gradient(90deg, #2DF4A1, #818CF8)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
         subtitle={gettingStartedHero.subtitle}
         backgroundImageSrc={gettingStartedHero.backgroundImageSrc}
       />

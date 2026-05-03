@@ -43,12 +43,12 @@ export const FeatureOverviewPanel: React.FC<FeatureOverviewPanelProps> = ({
       </div>
 
       {/* Feature checklist */}
-      <div className="bg-gradient-to-r from-auth-primary/10 via-auth-accent/10 to-auth-secondary/10 rounded-lg p-6 border border-auth-primary/20">
+      <div className="bg-gradient-to-r from-hash-primary/10 via-hash-accent/10 to-hash-secondary/10 rounded-lg p-6 border border-hash-primary/20">
         <h3 className="text-xl font-semibold text-white mb-4">{checklistTitle}</h3>
         <ul className="grid md:grid-cols-2 gap-3 text-slate-300">
           {checklistItems.map((item, i) => (
             <li key={i} className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-auth-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 text-hash-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
               {item}

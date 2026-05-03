@@ -1,239 +1,171 @@
-import React from 'react';
+'use client';
 
-export interface FooterProps {
-  /**
-   * Newsletter submission handler
-   */
-  onNewsletterSubmit?: (email: string) => void;
-  /**
-   * Social media links
-   */
-  socialLinks?: {
-    facebook?: string;
-    twitter?: string;
-    instagram?: string;
-    discord?: string;
-  };
-  /**
-   * Quick links configuration
-   */
-  quickLinks?: {
-    left?: Array<{ label: string; href: string }>;
-    right?: Array<{ label: string; href: string }>;
-  };
-  /**
-   * Newsletter section configuration
-   */
-  newsletter?: {
-    title?: string;
-    description?: string;
-    placeholder?: string;
-  };
-  /**
-   * Copyright text
-   */
-  copyrightText?: string;
-  /**
-   * Designer credit
-   */
-  designerCredit?: {
-    text: string;
-    name: string;
-    href?: string;
-  };
+import React from 'react';
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faTwitter, faDiscord, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+
+export interface GlobalFooterLink {
+  label: string;
+  href: string;
+  external?: boolean;
 }
 
-export const Footer: React.FC<FooterProps> = ({
-  onNewsletterSubmit,
-  socialLinks = {
-    facebook: '#',
-    twitter: '#',
-    instagram: '#',
-    discord: '#',
-  },
-  quickLinks = {
-    left: [
-      { label: 'Buy Crypto', href: '/buy-crypto' },
-      { label: 'Sell Crypto', href: '/sell-crypto' },
-      { label: 'Swap', href: '/swap' },
-      { label: 'Coin Market', href: '/market' },
-    ],
-    right: [
-      { label: 'Earn', href: '/earn' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Pricing', href: '/pricing' },
-      { label: 'Contact Us', href: '/contact' },
-    ],
-  },
-  newsletter = {
-    title: 'Newsletter',
-    description: 'Welcome to CritoX your gateway to the world of Web3 trading! Our user-friendly platform',
-    placeholder: 'Enter Your Email...',
-  },
-  copyrightText = 'CritoX',
-  designerCredit = {
-    text: 'Designed By',
-    name: 'Pixelaxis',
-    href: '#',
-  },
-}) => {
-  const [email, setEmail] = React.useState('');
-  const currentYear = new Date().getFullYear();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (onNewsletterSubmit && email) {
-      onNewsletterSubmit(email);
-      setEmail('');
-    }
+export interface GlobalFooterProps {
+  /** Object keys become column headings, values are the link lists */
+  links: Record<string, GlobalFooterLink[]>;
+  socialLinks?: {
+    github?: string;
+    twitter?: string;
+    discord?: string;
+    linkedin?: string;
   };
+  /** Content rendered inside the logo square, e.g. <span>#</span> */
+  brandLogoContent: React.ReactNode;
+  brandName: string;
+  brandTagline: string;
+  brandHref?: string;
+  /** Copyright owner name, e.g. "CodexHash" */
+  serviceName?: string;
+  platformName?: string;
+  platformHref?: string;
+  year?: number;
+  /** Tailwind class for footer background, e.g. "bg-hash-bg" */
+  bgClass?: string;
+  /** Tailwind class for top border, e.g. "border-hash-primary/10" */
+  borderClass?: string;
+  /** Tailwind class for logo square bg, e.g. "bg-gradient-hash" */
+  logoBgClass?: string;
+  /** Tailwind class for logo text/icon colour, e.g. "text-hash-bg" */
+  logoTextClass?: string;
+  /** Full hover class for link accent, e.g. "hover:text-hash-primary" */
+  accentHoverClass?: string;
+  /** Text class for platform link, e.g. "text-hash-primary" */
+  accentTextClass?: string;
+}
+
+export function GlobalFooter({
+  links,
+  socialLinks = {},
+  brandLogoContent,
+  brandName,
+  brandTagline,
+  brandHref = '/',
+  serviceName,
+  platformName = 'Web3Codex',
+  platformHref = 'https://web3connected.com',
+  year = new Date().getFullYear(),
+  bgClass = 'bg-background',
+  borderClass = 'border-primary/10',
+  logoBgClass = 'bg-primary',
+  logoTextClass = 'text-primary-foreground',
+  accentHoverClass = 'hover:text-primary',
+  accentTextClass = 'text-primary',
+}: GlobalFooterProps) {
+  const columns = Object.entries(links);
+  const copyright = serviceName ?? brandName;
 
   return (
-    <footer className="bg-accent5 relative overflow-hidden">
-      {/* Blur Effects */}
-      <div className="w-[150px] lg:w-[250px] h-[150px] lg:h-[250px] absolute bottom-[-6%] blur-[85px] left-[-9%] bg-primary/50"></div>
-      <div className="w-[150px] lg:w-[250px] h-[150px] lg:h-[250px] absolute top-[-6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+    <footer className={`${bgClass} border-t ${borderClass}`}>
+      <div className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-10">
 
-      <div className="pb-120 pt-120 relative z-[2] container grid grid-cols-12 xxl:grid-cols-10 gap-6 lg:divide-x divide-accent4">
-        {/* Quick Links */}
-        <div className="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3">
-          <h3 className="mb-4 xl:mb-6">Quick Links</h3>
-          <div className="grid grid-cols-2">
-            <div className="col-span-1 flex flex-col gap-4">
-              {quickLinks.left?.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="animated-link hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-            <div className="col-span-1 flex flex-col gap-4">
-              {quickLinks.right?.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="animated-link hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Newsletter */}
-        <div
-          data-delay=".15"
-          className="fade_up_anim col-span-12 md:col-span-6 xl:col-span-6 xxl:col-span-4"
-        >
-          <div className="text-center px-4 md:px-6 lg:px-10 xxl:px-16">
-            <h3 className="mb-4 xl:mb-6">{newsletter.title}</h3>
-            <p className="text-neutral4 lg:text-lg mb-8 xl:mb-10">
-              {newsletter.description}
+          {/* Brand Column */}
+          <div className="col-span-2 md:col-span-3 lg:col-span-2 mb-8 lg:mb-0">
+            <Link href={brandHref as any} className="flex items-center gap-3 mb-4">
+              <div className={`w-10 h-10 rounded-lg ${logoBgClass} flex items-center justify-center`}>
+                <span className={`${logoTextClass} font-bold text-lg`}>{brandLogoContent}</span>
+              </div>
+              <span className="font-brand text-2xl font-semibold text-foreground">
+                {brandName}
+              </span>
+            </Link>
+            <p className="text-foreground/60 text-sm mb-6 max-w-xs leading-relaxed">
+              {brandTagline}
             </p>
-            <form onSubmit={handleSubmit} className="flex items-center">
-              <input
-                type="email"
-                placeholder={newsletter.placeholder}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full focus:border-primary bg-transparent rounded-full px-5 py-4 border border-accent4"
-                required
-              />
-              <button
-                type="submit"
-                aria-label="submit button"
-                className="size-[56px] rounded-full bg-primary shrink-0 f-center text-xl hover:bg-primary/90 transition-colors"
-              >
-                <i className="ti ti-arrow-up-right"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Social Links */}
-        <div
-          data-delay=".3"
-          className="fade_up_anim col-span-12 xl:col-span-3"
-        >
-          <div className="text-center pl-4 lg:pl-6 xxl:pl-10 xxxl:pl-12">
-            <h3 className="mb-4 xl:mb-6">Follow Us</h3>
-            <div className="mb-7 xl:mb-10 flex justify-center gap-4">
-              {socialLinks.facebook && (
-                <a
-                  className="social-link size-10 rounded-full border border-accent4 f-center hover:bg-primary hover:border-primary transition-colors"
-                  href={socialLinks.facebook}
-                  aria-label="facebook link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="ti ti-brand-facebook"></i>
+            <div className="flex items-center gap-4">
+              {socialLinks.github && (
+                <a href={socialLinks.github} target="_blank" rel="noopener noreferrer"
+                  className={`text-foreground/50 ${accentHoverClass} transition-colors`} aria-label="GitHub">
+                  <FontAwesomeIcon icon={faGithub} className="w-5 h-5" />
                 </a>
               )}
               {socialLinks.twitter && (
-                <a
-                  className="social-link size-10 rounded-full border border-accent4 f-center hover:bg-primary hover:border-primary transition-colors"
-                  href={socialLinks.twitter}
-                  aria-label="twitter link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="ti ti-brand-twitter"></i>
-                </a>
-              )}
-              {socialLinks.instagram && (
-                <a
-                  className="social-link size-10 rounded-full border border-accent4 f-center hover:bg-primary hover:border-primary transition-colors"
-                  href={socialLinks.instagram}
-                  aria-label="instagram link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="ti ti-brand-instagram"></i>
+                <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer"
+                  className={`text-foreground/50 ${accentHoverClass} transition-colors`} aria-label="Twitter">
+                  <FontAwesomeIcon icon={faTwitter} className="w-5 h-5" />
                 </a>
               )}
               {socialLinks.discord && (
-                <a
-                  className="social-link size-10 rounded-full border border-accent4 f-center hover:bg-primary hover:border-primary transition-colors"
-                  href={socialLinks.discord}
-                  aria-label="discord link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="ti ti-brand-discord"></i>
+                <a href={socialLinks.discord} target="_blank" rel="noopener noreferrer"
+                  className={`text-foreground/50 ${accentHoverClass} transition-colors`} aria-label="Discord">
+                  <FontAwesomeIcon icon={faDiscord} className="w-5 h-5" />
+                </a>
+              )}
+              {socialLinks.linkedin && (
+                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer"
+                  className={`text-foreground/50 ${accentHoverClass} transition-colors`} aria-label="LinkedIn">
+                  <FontAwesomeIcon icon={faLinkedin} className="w-5 h-5" />
                 </a>
               )}
             </div>
-            <p className="text-neutral4 lg:text-lg">
-              empowers you to explore a wide range of popular cryptocurrencies
+          </div>
+
+          {/* Dynamic link columns */}
+          {columns.map(([heading, items]) => (
+            <div key={heading}>
+              <h3 className="text-foreground font-semibold mb-4 text-sm uppercase tracking-wider">
+                {heading}
+              </h3>
+              <ul className="space-y-3">
+                {items.map((link) => (
+                  <li key={link.href}>
+                    {link.external ? (
+                      <a href={link.href} target="_blank" rel="noopener noreferrer"
+                        className={`text-foreground/60 ${accentHoverClass} transition-colors text-sm`}>
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link href={link.href as any}
+                        className={`text-foreground/60 ${accentHoverClass} transition-colors text-sm`}>
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+        </div>
+
+        {/* Copyright bar */}
+        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-foreground/40 text-sm">
+            &copy; {year} {copyright}. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <Link href={'/terms' as any} className="text-foreground/40 hover:text-foreground/70 transition-colors text-sm">
+              Terms
+            </Link>
+            <Link href={'/privacy' as any} className="text-foreground/40 hover:text-foreground/70 transition-colors text-sm">
+              Privacy
+            </Link>
+            <p className="text-foreground/40 text-sm">
+              Part of the{' '}
+              <a href={platformHref} target="_blank" rel="noopener noreferrer"
+                className={`${accentTextClass} opacity-70 ${accentHoverClass} transition-colors`}>
+                {platformName}
+              </a>{' '}
+              platform
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* Copyright */}
-      <div className="py-5 xl:py-8 border-t border-accent4">
-        <div className="container text-center flex justify-center gap-2 sm:gap-3 items-center relative z-[2]">
-          <p className="text-xs sm:text-sm md:text-base xl:text-lg">
-            Copyright @ <span id="year">{currentYear}</span> {copyrightText}
-          </p>
-          <span className="text-sm xl:text-xl">|</span>
-          <p className="text-xs sm:text-sm md:text-base xl:text-lg">
-            {designerCredit.text}{' '}
-            <a
-              href={designerCredit.href}
-              className="text-primary underline lg:text-lg hover:text-primary/80 transition-colors"
-            >
-              {designerCredit.name}
-            </a>
-          </p>
         </div>
       </div>
     </footer>
   );
-};
+}
 
-export default Footer;
+export { GlobalFooter as Footer };
+export type { GlobalFooterProps as FooterProps };
+export default GlobalFooter;

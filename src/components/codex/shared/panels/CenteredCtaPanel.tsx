@@ -25,10 +25,10 @@ export const CenteredCtaPanel: React.FC<CenteredCtaPanelProps> = ({
 }) => {
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-auth-primary/5 via-transparent to-auth-secondary/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-hash-primary/5 via-transparent to-hash-secondary/5 pointer-events-none" />
       <div className="container mx-auto px-4 text-center">
         {eyebrow && (
-          <p className="text-xs font-mono text-auth-primary/60 tracking-widest uppercase mb-4">{eyebrow}</p>
+          <p className="text-xs font-mono text-hash-primary/60 tracking-widest uppercase mb-4">{eyebrow}</p>
         )}
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{title}</h2>
         {subtitle && (
@@ -44,7 +44,7 @@ export const CenteredCtaPanel: React.FC<CenteredCtaPanelProps> = ({
                 rel="noopener noreferrer"
                 className={
                   btn.primary
-                    ? 'group inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-auth-primary text-white font-semibold transition-all hover:bg-auth-primary/90 hover:scale-105 hover:shadow-lg hover:shadow-auth-primary/25'
+                    ? 'group inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-hash-primary text-white font-semibold transition-all hover:bg-hash-primary/90 hover:scale-105 hover:shadow-lg hover:shadow-hash-primary/25'
                     : 'inline-flex items-center px-8 py-4 rounded-lg border border-white/20 text-white font-semibold transition-all hover:bg-white/5'
                 }
               >
@@ -56,7 +56,7 @@ export const CenteredCtaPanel: React.FC<CenteredCtaPanelProps> = ({
                 href={btn.href}
                 className={
                   btn.primary
-                    ? 'group inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-auth-primary text-white font-semibold transition-all hover:bg-auth-primary/90 hover:scale-105 hover:shadow-lg hover:shadow-auth-primary/25'
+                    ? 'group inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-hash-primary text-white font-semibold transition-all hover:bg-hash-primary/90 hover:scale-105 hover:shadow-lg hover:shadow-hash-primary/25'
                     : 'inline-flex items-center px-8 py-4 rounded-lg border border-white/20 text-white font-semibold transition-all hover:bg-white/5'
                 }
               >

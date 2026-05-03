@@ -66,7 +66,7 @@ export const CodeBlockQuickStart: React.FC<CodeBlockQuickStartProps> = ({
                   onClick={() => setSelectedLang(lang.id)}
                   className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
                     selectedLang === lang.id
-                      ? 'bg-[#0d1117] text-auth-primary border-t border-x border-white/10 -mb-px'
+                      ? 'bg-[#0d1117] text-hash-primary border-t border-x border-white/10 -mb-px'
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
@@ -127,7 +127,7 @@ function InstallPill({ manager, command }: { manager: string; command: string })
 
   return (
     <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-white/5 border border-white/10 group">
-      <span className="text-xs text-auth-primary font-semibold uppercase shrink-0">{manager}</span>
+      <span className="text-xs text-hash-primary font-semibold uppercase shrink-0">{manager}</span>
       <code className="text-xs text-slate-400 truncate flex-1">{command}</code>
       <button
         onClick={handleCopy}

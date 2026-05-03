@@ -31,12 +31,12 @@ export const DocumentSectionsPanel: React.FC<DocumentSectionsPanelProps> = ({
   navLinks,
 }) => {
   return (
-    <section className="min-h-screen bg-auth-bg text-foreground">
+    <section className="min-h-screen bg-hash-bg text-foreground">
       <div className="container mx-auto px-4 py-20 max-w-3xl">
 
         {/* Header */}
         <div className="mb-12 pt-16">
-          <p className="text-xs font-mono text-auth-primary/60 tracking-widest uppercase mb-3">
+          <p className="text-xs font-mono text-hash-primary/60 tracking-widest uppercase mb-3">
             {eyebrow}
           </p>
           <h1 className="text-4xl font-bold text-white mb-4">{title}</h1>
@@ -67,7 +67,7 @@ export const DocumentSectionsPanel: React.FC<DocumentSectionsPanelProps> = ({
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-auth-primary/70 hover:text-auth-primary transition-colors"
+                  className="text-hash-primary/70 hover:text-hash-primary transition-colors"
                 >
                   {link.label}
                 </a>
@@ -75,7 +75,7 @@ export const DocumentSectionsPanel: React.FC<DocumentSectionsPanelProps> = ({
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-auth-primary/70 hover:text-auth-primary transition-colors"
+                  className="text-hash-primary/70 hover:text-hash-primary transition-colors"
                 >
                   {link.label}
                 </Link>

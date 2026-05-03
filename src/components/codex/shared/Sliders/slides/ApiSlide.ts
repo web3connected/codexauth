@@ -5,7 +5,7 @@ import { ProductSlide } from '../types';
  * Layout: split-left — code on left, content on right
  */
 const ApiSlide: ProductSlide = {
-  id: 'codexauth-api',
+  id: 'codexhash-api',
   layout: 'split-left',
   tag: 'Simple API',
   tagColor: 'green',
@@ -14,9 +14,9 @@ const ApiSlide: ProductSlide = {
     'Integrate quantum-resistant hashing into any application with our dead-simple SDK. JavaScript, TypeScript, Python — all supported.',
   ctaText: 'Explore API',
   ctaLink: '/api-explorer',
-  codeSnippet: `import { CodexAuth } from '@web3codex/hash';
+  codeSnippet: `import { CodexHash } from '@web3codex/hash';
 
-const hash = await CodexAuth.generate('your-data');
+const hash = await CodexHash.generate('your-data');
 // → "ch_a9f3e2b1c8d7..."`,
 };
 

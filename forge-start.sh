@@ -13,10 +13,10 @@ if [ ! -d ".next" ]; then
 fi
 
 # Set environment
-export PORT="${PORT:-3003}"
+export PORT="${PORT:-3004}"
 export NODE_ENV="production"
 
 # Start with PM2
 pm2 delete codexauth 2>/dev/null || true
-pm2 start npm --name "codexauth" -- start
+pm2 start ecosystem.config.js --only codexauth-prod
 pm2 save

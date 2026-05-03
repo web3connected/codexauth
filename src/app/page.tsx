@@ -1,4 +1,7 @@
-import DevPortalHero from '@/components/panels/devportal/DevPortalHero';
+import MainSliderComponent from '@/components/codex/shared/Sliders/MainSliderComponent';
+import HeroSlide from '@/data/slides/HeroSlide';
+import TIUSlide from '@/data/slides/TIUSlide';
+import CodexHashSlide from '@/data/slides/CodexHashSlide';
 import { ThreePanelCardDesign } from '@/components/codex/shared/panels/ThreePanelCardDesign';
 import { CodeBlockQuickStart } from '@/components/codex/shared/panels/CodeBlockQuickStart';
 import { FeatureCardGrid } from '@/components/codex/shared/panels/FeatureCardGrid';
@@ -12,10 +15,13 @@ import { codexHashHighlights } from '@/data/highlights.data';
 import { codexHashTiers } from '@/data/tiers.data';
 import { codexHashCommunityLinks, codexHashCtaButtons } from '@/data/community.data';
 
+const slides = [HeroSlide, TIUSlide, CodexHashSlide];
+
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <DevPortalHero />
+      {/* Header = 40px topbar + 100px nav = 140px total */}
+      <MainSliderComponent slides={slides} height="calc(100vh - 140px)" />
       <ThreePanelCardDesign
         cards={codexHashConceptCards}
         backgroundImageSrc="/assets/images/abstract-design-shape-pattern-background-vibrant-blue-texture-and-geometric-mosaic_9969503.webp"
@@ -32,8 +38,8 @@ export default function Home() {
         viewAllHref="/sdk"
       />
       <HighlightGrid
-        title="Why CodexAuth?"
-        subtitle="Enterprise-grade quantum-resistant hashing built for the future"
+        title="What CodexAuth Does Natively"
+        subtitle="Core capabilities built into every CodexAuth install — no add-ons required"
         cards={codexHashHighlights}
       />
       <TierComparisonGrid

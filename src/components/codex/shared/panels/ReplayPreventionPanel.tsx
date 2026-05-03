@@ -55,7 +55,7 @@ Hash:   HASH_001   ← reused ❌`}</pre>
       <div>
         <h3 className="text-xl font-semibold text-white mb-4">What to Include in Hash Input</h3>
         <p className="text-slate-400 text-sm mb-4">
-          CodexAuth doesn't prevent replay by itself — it detects it when you include the right context fields:
+          CodexHash doesn't prevent replay by itself — it detects it when you include the right context fields:
         </p>
         <div className="overflow-x-auto">
           <table className="w-full bg-slate-800/50 rounded-lg text-sm">
@@ -70,7 +70,7 @@ Hash:   HASH_001   ← reused ❌`}</pre>
             <tbody>
               {contextInputs.map((input) => (
                 <tr key={input.field} className="border-b border-slate-700">
-                  <td className="p-4 font-mono text-auth-secondary text-xs">{input.field}</td>
+                  <td className="p-4 font-mono text-hash-secondary text-xs">{input.field}</td>
                   <td className="p-4">
                     <span className={`px-2 py-0.5 rounded text-xs ${input.required ? 'bg-red-600 text-white' : 'bg-slate-600 text-slate-300'}`}>
                       {input.required ? 'Required' : 'Optional'}
@@ -88,7 +88,7 @@ Hash:   HASH_001   ← reused ❌`}</pre>
       {/* Hash computation structure */}
       <div>
         <h3 className="text-xl font-semibold text-white mb-3">Hash Computation Structure</h3>
-        <pre className="bg-black rounded-lg p-4 text-auth-primary font-mono text-sm overflow-x-auto">{`hash = SHA3-512(
+        <pre className="bg-black rounded-lg p-4 text-hash-primary font-mono text-sm overflow-x-auto">{`hash = SHA3-512(
     domain_tag      // CODEXHASH|ENTERPRISE|
   + context_tag     // CONTEXT|transfer|USD|
   + prev_hash       // links to prior event
@@ -101,7 +101,7 @@ Hash:   HASH_001   ← reused ❌`}</pre>
       {codeExample && (
         <div>
           <h3 className="text-xl font-semibold text-white mb-3">Example</h3>
-          <pre className="bg-black rounded-lg p-4 text-auth-primary font-mono text-sm overflow-x-auto">{codeExample}</pre>
+          <pre className="bg-black rounded-lg p-4 text-hash-primary font-mono text-sm overflow-x-auto">{codeExample}</pre>
         </div>
       )}
 
@@ -109,8 +109,8 @@ Hash:   HASH_001   ← reused ❌`}</pre>
       <div className="bg-green-900/10 rounded-lg border border-green-500/20 p-5">
         <h4 className="font-semibold text-white mb-2">Why replay fails</h4>
         <p className="text-slate-300 text-sm">
-          The <code className="text-auth-secondary font-mono text-xs">context_tag</code> and{' '}
-          <code className="text-auth-secondary font-mono text-xs">tiu</code> fields change the hash output even for identical
+          The <code className="text-hash-secondary font-mono text-xs">context_tag</code> and{' '}
+          <code className="text-hash-secondary font-mono text-xs">tiu</code> fields change the hash output even for identical
           event data. A hash computed for <code className="text-slate-400 font-mono text-xs">"CONTEXT|transfer|USD|"</code> cannot
           be reused in a <code className="text-slate-400 font-mono text-xs">"CONTEXT|transfer|JPY|"</code> context — the resulting
           hash is entirely different.

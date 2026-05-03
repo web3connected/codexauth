@@ -37,7 +37,7 @@ export const SERVICES_CONFIG: ServiceLink[] = [
   },
   {
     id: 'codex-hash',
-    name: 'CodexAuth',
+    name: 'CodexHash',
     url: process.env.NEXT_PUBLIC_SERVICE_CODEX_HASH_URL || 'http://localhost:8087',
     icon: '🔐',
     description: 'Quantum Hashing'
@@ -71,18 +71,11 @@ export const SERVICES_CONFIG: ServiceLink[] = [
     description: 'AI & Analytics'
   },
   {
-    id: 'codex-voice',
-    name: 'CodexVoice',
-    url: process.env.NEXT_PUBLIC_SERVICE_CODEX_VOICE_URL || 'http://localhost:8091',
-    icon: '🎤',
-    description: 'Voice & Communication'
-  },
-  {
-    id: 'codex-trader',
-    name: 'CodexTrader',
-    url: process.env.NEXT_PUBLIC_SERVICE_CODEX_TRADER_URL || 'http://localhost:8092',
-    icon: '📈',
-    description: 'Trading & Markets'
+    id: 'chappie-wallet',
+    name: 'ChappieWallet',
+    url: process.env.NEXT_PUBLIC_SERVICE_CHAPPIE_WALLET_URL || 'http://localhost:8093',
+    icon: '👛',
+    description: 'Multi-chain Wallet & DeFi'
   },
 ];
 

@@ -43,7 +43,7 @@ export const SecurityTiersPanel: React.FC<SecurityTiersPanelProps> = ({
               key={tier.name}
               className={`rounded-lg p-6 border flex flex-col gap-4 ${
                 highlight
-                  ? 'bg-gradient-to-br from-auth-primary/10 to-auth-secondary/10 border-auth-primary/40 ring-1 ring-auth-primary/30'
+                  ? 'bg-gradient-to-br from-hash-primary/10 to-hash-secondary/10 border-hash-primary/40 ring-1 ring-hash-primary/30'
                   : 'bg-slate-800/50 border-slate-600'
               }`}
             >
@@ -52,13 +52,13 @@ export const SecurityTiersPanel: React.FC<SecurityTiersPanelProps> = ({
                   <h3 className="text-lg font-bold text-white">{tier.name}</h3>
                   <span
                     className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                      highlight ? 'bg-auth-primary text-white' : 'bg-slate-600 text-slate-300'
+                      highlight ? 'bg-hash-primary text-white' : 'bg-slate-600 text-slate-300'
                     }`}
                   >
                     {tier.badge}
                   </span>
                 </div>
-                <div className={`text-4xl font-black mb-1 ${highlight ? 'text-auth-primary' : 'text-white'}`}>
+                <div className={`text-4xl font-black mb-1 ${highlight ? 'text-hash-primary' : 'text-white'}`}>
                   {tier.bits}-bit
                 </div>
                 <p className="text-slate-400 text-xs font-mono">
@@ -69,7 +69,7 @@ export const SecurityTiersPanel: React.FC<SecurityTiersPanelProps> = ({
               <ul className="space-y-1 text-sm text-slate-300">
                 {tier.useCases.map((uc) => (
                   <li key={uc} className="flex items-start gap-2">
-                    <span className="text-auth-primary mt-0.5">✓</span>
+                    <span className="text-hash-primary mt-0.5">✓</span>
                     {uc}
                   </li>
                 ))}
@@ -119,7 +119,7 @@ export const SecurityTiersPanel: React.FC<SecurityTiersPanelProps> = ({
       <div className="bg-slate-800/40 rounded-lg border border-slate-600 p-5">
         <p className="text-slate-300 text-sm">
           <span className="text-white font-semibold">Domain separation:</span>{' '}
-          Each tier uses a unique domain tag (<code className="text-auth-secondary font-mono text-xs">CODEXHASH|ENTERPRISE|</code>)
+          Each tier uses a unique domain tag (<code className="text-hash-secondary font-mono text-xs">CODEXHASH|ENTERPRISE|</code>)
           prepended to every hash computation. Tiers cannot be cross-validated — an Enterprise hash cannot accidentally pass
           Government verification.
         </p>

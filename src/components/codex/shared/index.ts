@@ -5,17 +5,14 @@ export { default as GlobalHeader } from './Header/GlobalHeader';
 export { GlobalWrapper } from './GlobalWrapper';
 export type { GlobalWrapperProps } from './GlobalWrapper';
 
-// Widgets
+// Shared Components
 export { default as ApplicationLogo } from './widgets/ApplicationLogo';
+
+// Widgets
 export { default as WhoIsLoggedInWidget } from './widgets/WhoIsLoggedInWidget';
 export { default as DateGreeterWidget } from './widgets/DateGreeterWidget';
-export { default as HeaderActions } from './widgets/HeaderActions';
-export { PageLoader } from './widgets';
-export type { PageLoaderProps } from './widgets';
 
-// Sliders
-export { ProductSlider } from './Sliders/ProductSlider';
-export type { ProductSlide } from './Sliders/types';
+
 
 // Panels
 export { ThreePanelCardDesign } from './panels/ThreePanelCardDesign';

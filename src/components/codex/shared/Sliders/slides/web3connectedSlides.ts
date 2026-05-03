@@ -1,0 +1,66 @@
+import { HeroSlide } from '../HeroSlider';
+
+export const web3ConnectedSlides: HeroSlide[] = [
+  {
+    id: 'codexhash-slide',
+    title: 'CodexHash',
+    subtitle: 'Quantum-Resistant Cryptography',
+    description: 'Next-gen harmonic hashing ensuring data immutability and user integrity. Advanced cryptographic functions, digital signatures, and CodexHarmonicHash technology.',
+    ctaText: 'Explore CodexHash',
+    ctaLink: '/products/codexhash',
+    backgroundImage: '/assets/images/sha-concept-pic.webp',
+    gradient: 'from-yellow-600/20 via-orange-600/20 to-red-600/20',
+  },
+  {
+    id: 'codextime-slide',
+    title: 'CodexTime',
+    subtitle: 'Temporal Services & Synchronization',
+    description: 'Universal temporal coordination with Codex Time Units. Smart scheduling, time-locked contracts, and deterministic time protocol for Web3 applications.',
+    ctaText: 'Discover CodexTime',
+    ctaLink: '/products/codextime',
+    backgroundImage: '/assets/images/MIT-Quantum-Clock-01-press_0.jpg',
+    gradient: 'from-purple-600/20 via-pink-600/20 to-indigo-600/20',
+  },
+  {
+    id: 'codexsecure-slide',
+    title: 'CodexSecure',
+    subtitle: 'Multi-Zone Security Enforcement',
+    description: 'Enterprise-grade zone enforcement across Z1–Z12 security layers. Device trust, route protection, and compliance-ready security infrastructure for Web3.',
+    ctaText: 'Secure Your Platform',
+    ctaLink: '/products/codexsecure',
+    backgroundImage: '/assets/images/top-web3-security-tools-main-1600.jpg',
+    gradient: 'from-red-600/20 via-rose-600/20 to-orange-600/20',
+  },
+  {
+    id: 'codexidentity-slide',
+    title: 'CodexIdentity',
+    subtitle: 'Decentralized Identity Management',
+    description: 'Sovereign identity solutions with DID standards, Web3 wallet integration, zero-knowledge proofs, and privacy-first authentication protocols.',
+    ctaText: 'Learn About Identity',
+    ctaLink: '/products/codexidentity',
+    backgroundImage: '/assets/images/20220209Web3900x420.jpg',
+    gradient: 'from-green-600/20 via-emerald-600/20 to-teal-600/20',
+  },
+  {
+    id: 'codexmind-slide',
+    title: 'CodexMind',
+    subtitle: 'AI-Powered Web3 Intelligence',
+    description: 'Autonomous AI agents, on-chain reasoning, and intelligent automation for decentralized applications. The cognitive layer of the Codex ecosystem.',
+    ctaText: 'Explore CodexMind',
+    ctaLink: '/products/codexmind',
+    backgroundImage: '/assets/images/blockchain-cubes-digital-circuit-board-decentralized-ai-web-technology-illustration-concept-decentralization-systems-387474789.webp',
+    gradient: 'from-cyan-600/20 via-blue-600/20 to-violet-600/20',
+  },
+  {
+    id: 'chappiewallet-slide',
+    title: 'ChappieWallet',
+    subtitle: 'Your Web3 Financial Hub',
+    description: 'Multi-chain wallet with seamless DeFi access, cross-chain swaps, and integrated AI assistant. Manage your digital assets with confidence and simplicity.',
+    ctaText: 'Get ChappieWallet',
+    ctaLink: '/products/chappiewallet',
+    backgroundImage: '/assets/images/futuristic-web3-blockchain-background-with-interconnected-digital-cubes-patterns_1166177-4998.avif',
+    gradient: 'from-indigo-600/20 via-purple-600/20 to-pink-600/20',
+  },
+];
+
+export default web3ConnectedSlides;

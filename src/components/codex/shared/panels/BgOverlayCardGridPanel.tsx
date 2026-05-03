@@ -41,7 +41,7 @@ export const BgOverlayCardGridPanel: React.FC<BgOverlayCardGridPanelProps> = ({
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-14">
           {eyebrow && (
-            <p className="text-xs font-mono text-auth-primary/60 tracking-widest uppercase mb-3">{eyebrow}</p>
+            <p className="text-xs font-mono text-hash-primary/60 tracking-widest uppercase mb-3">{eyebrow}</p>
           )}
           {title && (
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{title}</h2>
@@ -55,22 +55,22 @@ export const BgOverlayCardGridPanel: React.FC<BgOverlayCardGridPanelProps> = ({
           {cards.map((card) => (
             <div
               key={card.name}
-              className="group relative flex flex-col rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 transition-all hover:bg-white/10 hover:border-auth-primary/30"
+              className="group relative flex flex-col rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 transition-all hover:bg-white/10 hover:border-hash-primary/30"
             >
-              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-auth-primary/40 to-transparent" />
-              <div className="mb-6 p-4 inline-flex rounded-2xl bg-auth-primary/10 border border-auth-primary/20 text-auth-primary w-fit">
+              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-hash-primary/40 to-transparent" />
+              <div className="mb-6 p-4 inline-flex rounded-2xl bg-hash-primary/10 border border-hash-primary/20 text-hash-primary w-fit">
                 <span className="text-2xl font-bold font-mono leading-none">{card.symbol}</span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-1 group-hover:text-auth-primary transition-colors">
+              <h3 className="text-xl font-bold text-white mb-1 group-hover:text-hash-primary transition-colors">
                 {card.name}
               </h3>
-              <p className="text-xs font-mono text-auth-primary/70 mb-4 tracking-wide uppercase">{card.tag}</p>
+              <p className="text-xs font-mono text-hash-primary/70 mb-4 tracking-wide uppercase">{card.tag}</p>
               <p className="text-slate-400 text-sm leading-relaxed flex-1">{card.description}</p>
               <div className="mt-8 pt-6 border-t border-white/10">
-                <span className="text-2xl font-bold text-auth-primary font-mono">{card.stat}</span>
+                <span className="text-2xl font-bold text-hash-primary font-mono">{card.stat}</span>
                 <p className="text-xs text-slate-500 mt-1">{card.statLabel}</p>
               </div>
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-auth-primary/0 via-auth-primary/3 to-auth-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-hash-primary/0 via-hash-primary/3 to-hash-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </div>
           ))}
         </div>

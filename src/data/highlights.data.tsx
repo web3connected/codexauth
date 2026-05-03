@@ -4,13 +4,13 @@ export const codexHashHighlights: HighlightCard[] = [
   {
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
       </svg>
     ),
-    title: 'Zone-Based Access',
+    title: 'Web2 + Web3 Login',
     description:
-      'Every session carries a zone claim (Z1–Z12). Middleware enforces zone boundaries on every route automatically — no custom guard code required.',
-    highlight: 'Z1–Z12 zones',
+      'One SDK handles both email/password flows and wallet-based sign-in. Users authenticate the way they prefer — CodexAuth normalises both into a single session model.',
+    highlight: 'Unified auth surface',
   },
   {
     icon: (
@@ -20,7 +20,7 @@ export const codexHashHighlights: HighlightCard[] = [
     ),
     title: 'Sub-50ms Auth',
     description:
-      'Login, token verification, and zone checks all resolve in under 50ms — fast enough for server-side rendering and edge middleware.',
+      'Login, token verification, and session checks all resolve in under 50ms — fast enough for server-side rendering and edge middleware with no extra infra.',
     highlight: '<50ms verification',
   },
   {
@@ -31,7 +31,7 @@ export const codexHashHighlights: HighlightCard[] = [
     ),
     title: 'TIU Time-Locked JWTs',
     description:
-      'Tokens embed a Time Interval Unit from CodexTime. Each JWT is mathematically valid only within its TIU window — expired or replayed tokens are rejected without a database lookup.',
+      'Tokens embed a Time Interval Unit window. Each JWT is valid only within its issue window — expired or replayed tokens are rejected without a database round-trip.',
     highlight: 'Replay-proof tokens',
   },
   {
@@ -42,19 +42,19 @@ export const codexHashHighlights: HighlightCard[] = [
     ),
     title: 'Drop-In SDK',
     description:
-      'One install, one import. The CodexAuth SDK handles login, token refresh, zone enforcement, and protected API calls with a minimal, typed surface area.',
+      'One install, one import. The CodexAuth SDK handles login, token refresh, and protected API calls with a minimal, fully-typed surface area — no boilerplate required.',
     highlight: 'Single SDK',
   },
   {
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
       </svg>
     ),
-    title: 'Hash-Verified Credentials',
+    title: 'Session Lifecycle Control',
     description:
-      'Passwords are verified through CodexHarmonicHash, not plain bcrypt. Any credential tampering is detected immediately without requiring a full credential comparison.',
-    highlight: 'Chain-verified',
+      'Built-in token refresh, silent re-auth, revocation, and multi-device session tracking. Every session state transition is handled in-SDK — no custom middleware needed.',
+    highlight: 'Full lifecycle',
   },
   {
     icon: (
@@ -64,7 +64,7 @@ export const codexHashHighlights: HighlightCard[] = [
     ),
     title: 'Full Audit Trail',
     description:
-      'Every login, token refresh, zone boundary crossing, and failed attempt is logged automatically. Compliance-ready audit output requires zero extra instrumentation.',
+      'Every login, token refresh, and failed attempt is logged automatically. Compliance-ready audit output with zero extra instrumentation.',
     highlight: 'SOC2 ready',
   },
 ];

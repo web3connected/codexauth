@@ -53,20 +53,20 @@ export const ThreePanelCardDesign: React.FC<ThreePanelCardDesignProps> = ({
 
 function Card({ card }: { card: PanelCard }) {
   return (
-    <div className="group relative flex flex-col rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 transition-all hover:bg-white/10 hover:border-auth-primary/30">
+    <div className="group relative flex flex-col rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 transition-all hover:bg-white/10 hover:border-hash-primary/30">
       {/* Top accent line */}
-      <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-auth-primary/40 to-transparent" />
+      <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-hash-primary/40 to-transparent" />
 
       {/* Icon */}
-      <div className="mb-6 p-4 inline-flex rounded-2xl bg-auth-primary/10 border border-auth-primary/20 text-auth-primary w-fit">
+      <div className="mb-6 p-4 inline-flex rounded-2xl bg-hash-primary/10 border border-hash-primary/20 text-hash-primary w-fit">
         {card.icon}
       </div>
 
       {/* Title + Tagline */}
-      <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-auth-primary transition-colors">
+      <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-hash-primary transition-colors">
         {card.title}
       </h3>
-      <p className="text-xs font-mono text-auth-primary/70 mb-4 tracking-wide uppercase">
+      <p className="text-xs font-mono text-hash-primary/70 mb-4 tracking-wide uppercase">
         {card.tagline}
       </p>
 
@@ -77,12 +77,12 @@ function Card({ card }: { card: PanelCard }) {
 
       {/* Stat */}
       <div className="mt-8 pt-6 border-t border-white/10">
-        <span className="text-3xl font-bold text-auth-primary">{card.stat}</span>
+        <span className="text-3xl font-bold text-hash-primary">{card.stat}</span>
         <p className="text-xs text-slate-500 mt-1">{card.statLabel}</p>
       </div>
 
       {/* Hover glow */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-auth-primary/0 via-auth-primary/3 to-auth-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-hash-primary/0 via-hash-primary/3 to-hash-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
     </div>
   );
 }

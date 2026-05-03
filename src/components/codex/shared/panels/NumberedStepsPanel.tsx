@@ -16,6 +16,8 @@ export interface NumberedStepsPanelProps {
   /** Optional formula lines rendered in a code block */
   formulaTitle?: string;
   formulaLines?: string[];
+  /** Optional background image URL for the panel */
+  backgroundImage?: string;
 }
 
 export const NumberedStepsPanel: React.FC<NumberedStepsPanelProps> = ({
@@ -24,9 +26,13 @@ export const NumberedStepsPanel: React.FC<NumberedStepsPanelProps> = ({
   steps,
   formulaTitle = 'Formula',
   formulaLines,
+  backgroundImage,
 }) => {
   return (
-    <div className="bg-slate-900/50 rounded-lg border border-slate-700 p-8 space-y-8">
+    <div
+      className="bg-slate-900/50 rounded-lg border border-slate-700 p-8 space-y-8"
+      style={backgroundImage ? { backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
+    >
       <div>
         <h1 className="text-3xl font-bold text-white mb-3">{title}</h1>
         {subtitle && <p className="text-xl text-slate-300">{subtitle}</p>}
@@ -37,7 +43,7 @@ export const NumberedStepsPanel: React.FC<NumberedStepsPanelProps> = ({
         {steps.map((step) => (
           <div key={step.step} className="bg-slate-800/50 rounded-lg p-6 border border-slate-600">
             <div className="flex items-start gap-4">
-              <div className="bg-auth-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0 text-sm">
+              <div className="bg-hash-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0 text-sm">
                 {step.step}
               </div>
               <div>
@@ -54,7 +60,7 @@ export const NumberedStepsPanel: React.FC<NumberedStepsPanelProps> = ({
       {formulaLines && formulaLines.length > 0 && (
         <div className="bg-slate-800/30 rounded-lg p-6 border border-slate-600">
           <h3 className="text-xl font-semibold text-white mb-4">{formulaTitle}</h3>
-          <div className="bg-black rounded-lg p-4 font-mono text-auth-primary text-sm overflow-x-auto space-y-1">
+          <div className="bg-black rounded-lg p-4 font-mono text-hash-primary text-sm overflow-x-auto space-y-1">
             {formulaLines.map((line, i) => (
               <div key={i}>{line}</div>
             ))}

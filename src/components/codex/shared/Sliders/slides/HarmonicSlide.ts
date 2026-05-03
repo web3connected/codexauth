@@ -5,7 +5,7 @@ import { ProductSlide } from '../types';
  * Layout: split-right — content left, image right
  */
 const HarmonicSlide: ProductSlide = {
-  id: 'codexauth-harmonic',
+  id: 'codexhash-harmonic',
   layout: 'split-right',
   tag: 'Harmonic Hashing',
   tagColor: 'purple',
