@@ -39,10 +39,10 @@ echo "✅ CodexAuth.io deployed!"
 
 # Health check
 sleep 3
-if curl -fs http://localhost:3003 > /dev/null; then
-    echo "✅ Site is responding on port 3003"
+if curl -fs http://localhost:3004 > /dev/null; then
+    echo "✅ Site is responding on port 3004"
 else
-    echo "⚠️  Health check: no response on :3003 yet (may still be starting)"
+    echo "⚠️  Health check: no response on :3004 yet (may still be starting)"
 fi
 
 echo "🎉 Deployment complete! CodexAuth.io is live!"
