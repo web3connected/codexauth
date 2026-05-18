@@ -2,7 +2,7 @@ import { ProductSlide } from '@/components/codex/shared/Sliders/types';
 
 /**
  * CodexHashSlide — CodexHarmonicHash explainer
- * Layout: comparison-cards — traditional hashing vs CodexHarmonicHash side by side
+ * Layout: comparison-cards — traditional credential hashing vs CodexHarmonicHash verification
  */
 const CodexHashSlide: ProductSlide = {
   id: 'codexauth-codexhash',
@@ -10,23 +10,31 @@ const CodexHashSlide: ProductSlide = {
   title: 'Powered by CodexHarmonicHash',
   titleGradient: { from: '#2DF4A1', to: '#2563EB' },
   description:
-    'Every credential, every session, every device fingerprint in CodexAuth is verified by the CodexHarmonicHash engine — not stored, never reversible.',
+    'CodexAuth uses CodexHarmonicHash to verify credentials, sessions, and device fingerprints through deterministic integrity checks — without exposing or reversing sensitive inputs.',
   ctaText: 'Explore CodexHash',
   ctaLink: 'https://codexhash.io',
   tagColor: '#2DF4A1',
   backgroundColor: '#070D1F',
   image: '/assets/images/codexauth_slide_03.webp',
-  imageAlt: 'CodexHarmonicHash — stateless credential verification engine',
+  imageAlt: 'CodexHarmonicHash — deterministic credential verification engine',
   comparisonCards: [
     {
       label: 'Traditional Hashing',
-      items: ['bcrypt / argon2 lookup', 'DB round-trip required', 'Vulnerable to timing attacks'],
+      items: [
+        'Password hash comparison',
+        'Credential state tied to database records',
+        'Security depends on storage and lookup design',
+      ],
       icons: [],
     },
     {
       label: 'CodexHarmonicHash',
       accentColor: '#2DF4A1',
-      items: ['Harmonic key derivation', 'Stateless — no DB lookup', 'Cryptographically constant-time'],
+      items: [
+        'Deterministic harmonic verification',
+        'Sensitive inputs are not reversible',
+        'Designed for constant-time validation paths',
+      ],
       icons: [],
     },
   ],
