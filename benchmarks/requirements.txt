@@ -1,6 +1,0 @@
-# CodexHash Benchmark Dependencies
-numpy>=1.21.0
-blake3>=0.3.0  # Optional: for BLAKE3 comparison
-matplotlib>=3.5.0
-seaborn>=0.11.0
-psutil>=5.8.0

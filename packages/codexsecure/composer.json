@@ -1,0 +1,39 @@
+{
+    "name": "web3codex/codexsecure",
+    "description": "CodexSecure - Device authentication, session management, and trust scoring for Web3Connected Codex system",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Web3Connected",
+            "email": "admin@web3connected.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/contracts": "^10.0|^11.0|^12.0",
+        "web3codex/codexcore": "*",
+        "web3codex/codexhash": "*",
+        "web3codex/codextime": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Web3Codex\\CodexSecure\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Web3Codex\\CodexSecure\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Web3Codex\\CodexSecure\\Providers\\CodexSecureServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
