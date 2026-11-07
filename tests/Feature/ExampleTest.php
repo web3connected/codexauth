@@ -2,18 +2,46 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_health_endpoint_returns_ok_json(): void
     {
-        $response = $this->getJson('/api/health');
+        $this->getJson('/api/health')
+            ->assertStatus(200)
+            ->assertHeader('Content-Type', 'application/json')
+            ->assertExactJson(['service' => 'codexauth', 'status' => 'ok']);
+    }
 
-        $response->assertOk();
+    public function test_health_returns_json_without_an_accept_header(): void
+    {
+        $this->get('/api/health')
+            ->assertStatus(200)
+            ->assertExactJson(['service' => 'codexauth', 'status' => 'ok']);
+    }
+
+    public function test_unknown_api_route_returns_json_404(): void
+    {
+        $this->get('/api/does-not-exist')
+            ->assertStatus(404)
+            ->assertHeader('Content-Type', 'application/json')
+            ->assertJsonStructure(['message']);
+    }
+
+    public function test_unknown_non_api_path_returns_json_404_not_html(): void
+    {
+        $this->get('/')
+            ->assertStatus(404)
+            ->assertHeader('Content-Type', 'application/json')
+            ->assertJsonStructure(['message']);
+    }
+
+    public function test_wrong_method_returns_json_405(): void
+    {
+        $this->post('/api/health')
+            ->assertStatus(405)
+            ->assertHeader('Content-Type', 'application/json')
+            ->assertJsonStructure(['message']);
     }
 }

@@ -1,66 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CodexAuth API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+CodexAuth is the authentication engine of the Web3Codex ecosystem. This repository is its standalone REST API: a Laravel 13 application that serves JSON over HTTP only. It has no frontend, web pages or browser sessions.
 
-## About Laravel
+CodexAuth will perform password-based authentication by calling two other Web3Codex services over HTTP:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **CodexHash**, which creates and validates credential hashes.
+- **CodexTime**, which supplies the Time Index Unit (TIU) used when a credential is created.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+CodexAuth holds the authentication logic itself. A separate client package may call this API from other applications, but it will not contain the engine.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Status
 
-## Learning Laravel
+**Phase 1: foundation.** The application is installed and configured as an API server. **No authentication endpoints exist yet.**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Area | State |
+| --- | --- |
+| `GET /api/health` | Implemented |
+| JSON errors for every route (404, 405, 422, 500) | Implemented |
+| Redis connection (cache) | Configured |
+| CodexHash and CodexTime settings | Configured; not called yet |
+| Credential creation and validation | Not started |
+| Challenge IDs | Not started; the protocol is undecided |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.3 or later. Development uses PHP 8.4.
+- Composer 2
+- Redis. The `predis/predis` client is included, so the PHP `redis` extension isn't needed.
 
-## Laravel Sponsors
+## Setup
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```sh
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan serve --host=127.0.0.1 --port=8013
+```
 
-### Premium Partners
+Check the service:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```sh
+curl http://127.0.0.1:8013/api/health
+# {"service":"codexauth","status":"ok"}
+```
 
-## Contributing
+## API
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+All routes are under `/api`, and every response, including errors, is JSON.
 
-## Code of Conduct
+### `GET /api/health`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Liveness check. It confirms the application is running; it does not check Redis, CodexHash or CodexTime.
 
-## Security Vulnerabilities
+```json
+{ "service": "codexauth", "status": "ok" }
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Errors
 
-## License
+Unknown routes return `404`, and a wrong HTTP method returns `405`, both as JSON with a `message` field. Validation failures will return `422`. With `APP_DEBUG=true` the error body also contains exception details. **Always set `APP_DEBUG=false` outside local development.**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Configuration
+
+Settings come from the environment. `.env.example` lists every key; a real `.env` is never committed.
+
+| Variable | Purpose | Example default |
+| --- | --- | --- |
+| `REDIS_CLIENT` | Redis client library | `predis` |
+| `REDIS_HOST` / `REDIS_PORT` | Redis server | `127.0.0.1` / `6379` |
+| `REDIS_DB` / `REDIS_CACHE_DB` | Redis databases for general use and the cache | `4` / `5` |
+| `REDIS_PREFIX` | Key prefix | `codexauth:` |
+| `CACHE_STORE` | Cache backend | `redis` |
+| `CODEXHASH_URL` | CodexHash base URL | `https://codexhash.web3codex.com` |
+| `CODEXHASH_API_KEY` | CodexHash API key, if required | empty |
+| `CODEXHASH_TIMEOUT` / `CODEXHASH_CONNECT_TIMEOUT` | Request and connect timeouts, in seconds | `5` / `2` |
+| `CODEXTIME_URL` | CodexTime base URL | `https://codextime.web3codex.com` |
+| `CODEXTIME_API_KEY` | CodexTime API key (sent as `X-Api-Key`) | empty |
+| `CODEXTIME_TIMEOUT` / `CODEXTIME_CONNECT_TIMEOUT` | Request and connect timeouts, in seconds | `5` / `2` |
+
+The service settings are read from `config/services.php` (`services.codexhash.*` and `services.codextime.*`).
+
+Sessions use the `array` driver and queues run synchronously. CodexAuth currently owns no database tables and ships no migrations; database schema for the Web3Codex ecosystem is managed in the Web3Codex project.
+
+## Tests
+
+```sh
+php artisan test
+```
+
+The feature tests in `tests/Feature/ExampleTest.php` cover the health response and the JSON error responses (404 and 405).
+
+## Project layout
+
+```text
+app/Http/Controllers/HealthController.php   GET /api/health
+bootstrap/app.php                           API-only routing; JSON rendering for all errors
+config/services.php                         CodexHash and CodexTime settings
+routes/api.php                              API routes (prefix /api)
+tests/Feature/                              HTTP tests
+```
+
+## Roadmap
+
+1. HTTP clients for CodexHash and CodexTime that fail closed: if a service is unavailable, the request fails. There is no local substitute for hashing or time.
+2. Password credential creation and validation through CodexHash's existing credential endpoints.
+3. Challenge ID support, once its protocol is decided.
+
+## History
+
+Earlier versions of this repository held a Next.js website and then a Laravel 11 CodexAuth implementation. Both remain available in the Git history.
